@@ -14,7 +14,9 @@ import { SeguradoService } from './segurado/segurado.service';
 import { HttpModule, RequestOptions } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 
-import {FormsModule} from '@angular/forms'
+import {FormsModule} from '@angular/forms';
+import { ReferenciadoComponent } from './referenciado/referenciado.component';
+import { RedeListaComponent } from './referenciado/rede-lista/rede-lista.component'
 
 
 @NgModule({
@@ -22,7 +24,9 @@ import {FormsModule} from '@angular/forms'
     AppComponent,
     SeguradoComponent,
     SeguradoProfileComponent,
-    MainComponent
+    MainComponent,
+    ReferenciadoComponent,
+    RedeListaComponent
     
   ],
   imports: [

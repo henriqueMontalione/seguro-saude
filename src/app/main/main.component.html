@@ -1,127 +1,21 @@
 <div class="main-content">
   <div class="container-fluid">
-      <div class="row">
-          <div class="col-md-8">
-              <div class="card">
-                  <div class="card-header" data-background-color="red">
-                      <h4 class="title">Perfil do segurado</h4>
-                      <p class="category">Apólice : 201801019293</p>
-                  </div>
-                  <div class="card-content">
-
-                    {{form.value | json}}
-
-                      <form  novalidate #form="ngForm">
-                          <div class="row">
-                              <div class="col-md-4">
-                                  <div class="form-group form-black label-floating is-empty">
-                                      <label class="control-label">CPF</label>
-                                      <input type="text" class="form-control">
-                                  </div>
-                              </div>
-                              <div class="col-md-3">
-                                  <div class="form-group form-black label-floating is-empty">
-                                      <label class="control-label">Data de Nascimento</label>
-                                      <input type="text" class="form-control" >
-                                  </div>
-                              </div>
-                              <div class="col-md-5">
-                                  <div class="form-group form-black label-floating is-empty">
-                                      <label class="control-label">Email</label>
-                                      <input type="email" class="form-control" >
-                                  </div>
-                              </div>
-                          </div>
-  
-                          <div class="row">
-                              <div class="col-md-9">
-                                  <div class="form-group form-black label-floating is-empty">
-                                      <label class="control-label">Nome</label>
-                                      <input type="text" class="form-control" >
-                                  </div>
-                            </div>
-                            <div class="col-md-3">
-                                    <div class="form-group form-black label-floating is-empty" >
-                                        <label class="control-label">Sexo</label>
-                                        <select class="form-control">
-                                            <option></option>
-                                            <option>Masculino</option>
-                                            <option>Feminino</option>
-                                        </select>
-                                    </div>
-                              </div>
-        
-                          </div>
-  
-                          <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group form-black label-floating is-empty">
-                                    <label class="control-label">CEP</label>
-                                    <input type="text" name="cep" [(ngModel)]="cep" class="form-control" (blur)="buscaCep()"/>
-                                </div>
-                              </div>
-                              <div class="col-md-6">
-                                  <div class="form-group form-black label-floating is-empty">
-                                      <label class="control-label">Logradouro</label>
-                                      <input type="text"  name="logradouro" [(ngModel)]="logradouro" class="form-control" disabled>
-                                  </div>
-                              </div>
-                              <div class="col-md-2">
-                                    <div class="form-group form-black label-floating is-empty">
-                                        <label class="control-label">Número</label>
-                                        <input type="text" class="form-control" >
-                                    </div>
-                                </div>
-                          </div>
-
-               
-                          <div class="row">
-                              <div class="col-md-4">
-                                  <div class="form-group form-black label-floating is-empty">
-                                      <label class="control-label">Bairro</label>
-                                      <input type="text" class="form-control" disabled>
-                                  </div>
-                              </div>
-                              <div class="col-md-4">
-                                  <div class="form-group form-black label-floating is-empty">
-                                      <label class="control-label">Cidade</label>
-                                      <input type="text" class="form-control" disabled>
-                                  </div>
-                              </div>
-                              <div class="col-md-4">
-                                  <div class="form-group form-black label-floating is-empty">
-                                      <label class="control-label">Estado</label>
-                                      <input type="text" class="form-control" disabled>
-                                  </div>
-                              </div>
-                          </div>
-
-                          <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group form-black label-floating is-empty">
-                                        <label class="control-label">Complemento</label>
-                                        <input type="text" class="form-control">
-                                    </div>
-                                </div>
-                               
-                            </div>
-  
-                          <button type="submit" class="btn btn-danger pull-right">Salvar</button>
-                          <div class="clearfix"></div>
-                      </form>
-                  </div>
-              </div>
-          </div>
-          <div class="col-md-4">
+      <div class="row">     
+          <div class="col-md-12">
               <div class="card card-profile">
                   <div class="card-avatar">
-                      <a href="#pablo">
+                      <a href="#">
                           <img class="img" src="../assets/img/faces/marc.jpg" />
                       </a>
                   </div>
-  
                   <div class="content">
                       <h6 class="category text-gray">Plano Platinum</h6>
+                      <h4 class="card-title">Carlos Aiello</h4>
+                      <h4 class="card-title">Carlos Aiello</h4>
+                      <h4 class="card-title">Carlos Aiello</h4>
+                      <h4 class="card-title">Carlos Aiello</h4>
+                      <h4 class="card-title">Carlos Aiello</h4>
+                      <h4 class="card-title">Carlos Aiello</h4>
                       <h4 class="card-title">Carlos Aiello</h4>
                       <p class="card-content">
                            Rio de Janeiro - RJ
