@@ -18,7 +18,7 @@ export class SeguradoProfileComponent implements OnInit {
   constructor(private seguradoService : SeguradoService) { }
 
   ngOnInit() {
-    //this.cep = '22750350'
+    
   }
 
   buscaCep(){

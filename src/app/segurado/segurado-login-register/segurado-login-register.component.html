@@ -4,31 +4,31 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header" data-background-color="red">
-                        <h4 class="title">Registro do Segurado</h4>
-                        <p class="category">Informe os dados baixo</p>
+                        <h4 class="title">Compre seu Plano de Saúde</h4>
+                        <p class="category">Informe seus dados</p>
                     </div>
                     <div class="card-content">
   
                       {{form.value | json}}
   
-                        <form  novalidate #form="ngForm">
+                        <form  novalidate #form="ngForm" (ngSubmit)="criarSegurado()">
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group form-black label-floating is-empty">
                                         <label class="control-label">CPF</label>
-                                        <input type="text" class="form-control">
+                                        <input type="text" [(ngModel)]="cpf" name="cpf" class="form-control">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="form-group form-black label-floating is-empty">
                                         <label class="control-label">Data de Nascimento</label>
-                                        <input type="text" class="form-control" >
+                                        <input type="text" [(ngModel)]="dataNascimento" name="dataNascimento" class="form-control" >
                                     </div>
                                 </div>
                                 <div class="col-md-5">
                                     <div class="form-group form-black label-floating is-empty">
                                         <label class="control-label">Email</label>
-                                        <input type="email" class="form-control" >
+                                        <input type="email" [(ngModel)]="email" name="email" class="form-control" >
                                     </div>
                                 </div>
                             </div>
@@ -37,13 +37,13 @@
                                 <div class="col-md-9">
                                     <div class="form-group form-black label-floating is-empty">
                                         <label class="control-label">Nome</label>
-                                        <input type="text" class="form-control" >
+                                        <input type="text" [(ngModel)]="nome" name="nome" class="form-control" >
                                     </div>
                               </div>
                               <div class="col-md-3">
                                       <div class="form-group form-black label-floating is-empty" >
                                           <label class="control-label">Sexo</label>
-                                          <select class="form-control">
+                                          <select class="form-control" [(ngModel)]="sexo" name="sexo">
                                               <option></option>
                                               <option>Masculino</option>
                                               <option>Feminino</option>
@@ -68,7 +68,7 @@
                                 <div class="col-md-2">
                                       <div class="form-group form-black label-floating is-empty">
                                           <label class="control-label">Número</label>
-                                          <input type="text" class="form-control" >
+                                          <input type="text" name="numero" [(ngModel)]="numero" class="form-control" >
                                       </div>
                                   </div>
                             </div>
@@ -77,7 +77,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="form-group form-black label-floating is-empty">
-                                        <input type="text" name="bairro" [(ngModel)]="bairro" class="form-control" disabled>
+                                        <input type="text" name="bairro"  [(ngModel)]="bairro" class="form-control" disabled>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
@@ -91,17 +91,29 @@
                                     </div>
                                 </div>
                             </div>
-  
                             <div class="row">
                                   <div class="col-md-12">
                                       <div class="form-group form-black label-floating is-empty">
                                           <label class="control-label">Complemento</label>
-                                          <input type="text" class="form-control">
+                                          <input type="text" name="complemento" [(ngModel)]="complemento" class="form-control">
                                       </div>
                                   </div>
                                  
                               </div>
-    
+                              <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group form-black label-floating is-empty">
+                                            <label class="control-label">Senha</label>
+                                            <input type="password" name="senha" [(ngModel)]="senha" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                            <div class="form-group form-black label-floating is-empty">
+                                                <label class="control-label">Confirmação da senha</label>
+                                                <input type="password" name="confirmacaoSenha" [(ngModel)]="confirmacaoSenha" class="form-control">
+                                            </div>
+                                        </div>
+                                </div>  
                             <button type="submit" class="btn btn-danger pull-right">Salvar</button>
                             <div class="clearfix"></div>
                         </form>
@@ -113,19 +125,25 @@
                     <div class="card card-profile">
                         <div class="content">
                          
-                            <h6 class="category text-gray">Plano Platinum</h6>
-                            <h4 class="card-title">Carlos Aiello</h4>
-                            <p class="card-content">
-                                 Rio de Janeiro - RJ
-                               
-                                
-                            </p>
-                            <form>
+                            <h6 class="category text-gray">Área do Segurado</h6>
+                            <div class="col-md-12">
+                                <form>
                                     
-                                <input type="text" name="login"/>
-                                <input type="text" name="password"/>
-                            </form>
-                            <a href="#pablo" class="btn btn-danger btn-round">Sair</a>
+                                    <div class="form-group form-black">
+                                        <label>CPF</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+
+                                    <div class="form-group form-black">
+                                            <label >Senha</label>
+                                            <input type="password" class="form-control">
+                                        </div>
+                                        <div class="form-group form-black label-floating is-empty">
+                                        <a href="#pablo" class="btn btn-danger btn-round">Entrar</a>
+                                    </div>
+
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
