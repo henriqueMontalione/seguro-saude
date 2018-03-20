@@ -14,13 +14,16 @@ export class NavbarComponent implements OnInit {
 
     constructor(location: Location,  private element: ElementRef) {
       this.location = location;
-          this.sidebarVisible = false;
+      this.sidebarVisible = false;
+        
     }
 
     ngOnInit(){
       this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
+
+      
     }
 
     sidebarOpen() {

@@ -23,18 +23,14 @@ export class SeguradoProfileComponent implements OnInit {
 
   buscaCep(){
     console.log('Executando o metodo de localizacao de endereco pelo cep => ' + this.cep)
- /*   this.seguradoService.enderecoByCep(this.cep).
+    this.seguradoService.enderecoByCep(this.cep).
             subscribe(seguradoEndereco => {
-              console.log('Segurado' + seguradoEndereco.cidade);
               this.logradouro = seguradoEndereco.logradouro;
+              this.bairro = seguradoEndereco.bairro
+              this.cidade = seguradoEndereco.cidade
+              this.uf = seguradoEndereco.uf
             }
-          ) */
-
-        this.logradouro = 'Rua Araguaia' //seguradoEndereco.logradouro
-        this.bairro = 'Freguesia' //seguradoEndereco.bairro
-        this.cidade = "Rio de Janeiro" //seguradoEndereco.cidade
-        this.uf = "RJ" //seguradoEndereco.uf
-
+          ) 
   }
 
 }

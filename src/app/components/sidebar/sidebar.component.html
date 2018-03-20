@@ -7,16 +7,21 @@
     </a>
 </div>
 <div class="sidebar-wrapper">
-    
 
     <div class="nav-container">
         <ul class="nav">
-            <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
+            <li  routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
                 <a  [routerLink]="[menuItem.path]">
                     <i class="material-icons">{{menuItem.icon}}</i>
                     <p>{{menuItem.title}}</p>
                 </a>
             </li>
+            <li>
+               <a>
+                <p>Instruções para Login</p>
+            </a>    
+            </li>
         </ul>
     </div>
+
 </div>

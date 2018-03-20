@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SeguradoComponent } from './segurado/segurado.component';
 import { SeguradoProfileComponent } from './segurado/segurado-profile/segurado-profile.component';
-import { MainComponent } from './main/main.component';
+
 import { RouterModule } from '@angular/router';
 import { ComponentsModule } from './components/components.module';
 
@@ -16,7 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 
 import {FormsModule} from '@angular/forms';
 import { ReferenciadoComponent } from './referenciado/referenciado.component';
-import { RedeListaComponent } from './referenciado/rede-lista/rede-lista.component'
+import { RedeListaComponent } from './referenciado/rede-lista/rede-lista.component';
+import { SeguradoLoginRegisterComponent } from './segurado/segurado-login-register/segurado-login-register.component'
 
 
 @NgModule({
@@ -24,9 +25,9 @@ import { RedeListaComponent } from './referenciado/rede-lista/rede-lista.compone
     AppComponent,
     SeguradoComponent,
     SeguradoProfileComponent,
-    MainComponent,
     ReferenciadoComponent,
-    RedeListaComponent
+    RedeListaComponent,
+    SeguradoLoginRegisterComponent
     
   ],
   imports: [
