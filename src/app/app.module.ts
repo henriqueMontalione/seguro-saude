@@ -18,6 +18,7 @@ import {FormsModule} from '@angular/forms';
 import { ReferenciadoComponent } from './referenciado/referenciado.component';
 import { RedeListaComponent } from './referenciado/rede-lista/rede-lista.component';
 import { SeguradoLoginRegisterComponent } from './segurado/segurado-login-register/segurado-login-register.component'
+import { ReferenciadoService } from './referenciado/referenciado.service';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { SeguradoLoginRegisterComponent } from './segurado/segurado-login-regist
     RouterModule.forRoot(ROUTES),
     FormsModule
   ],
-  providers: [SeguradoService],
+  providers: [SeguradoService, ReferenciadoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
