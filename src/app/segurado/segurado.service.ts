@@ -32,8 +32,8 @@ export class SeguradoService{
         catch(ErrorHandler.handleError)
     }
 
-    planos() : Observable<SeguradoPlano> { 
     
+    planos() : Observable<SeguradoPlano[]> { 
         console.log('Acessando a URL => ' + `${PLANO_SERVICE}`)
         return this.httpClient.get<SeguradoPlano[]>(`${PLANO_SERVICE}`, {headers : this._headers}).
         catch(ErrorHandler.handleError)

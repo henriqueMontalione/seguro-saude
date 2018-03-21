@@ -20,6 +20,8 @@ import { RedeListaComponent } from './referenciado/rede-lista/rede-lista.compone
 import { SeguradoLoginRegisterComponent } from './segurado/segurado-login-register/segurado-login-register.component'
 import { ReferenciadoService } from './referenciado/referenciado.service';
 
+import {NgxMaskModule} from 'ngx-mask'
+
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { ReferenciadoService } from './referenciado/referenciado.service';
     ComponentsModule,
     HttpClientModule,
     RouterModule.forRoot(ROUTES),
-    FormsModule
+    FormsModule,
+    NgxMaskModule.forRoot()
   ],
   providers: [SeguradoService, ReferenciadoService],
   bootstrap: [AppComponent]

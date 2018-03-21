@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SeguradoService } from '../segurado.service';
 import { SeguradoPlano } from '../segurado-plano.model';
+import {Segurado} from '../segurado.model'
+import { SeguradoEndereco } from '../segurado-endereco.model';
+
 
 @Component({
   selector: 'app-segurado-login-register',
@@ -24,15 +27,45 @@ export class SeguradoLoginRegisterComponent implements OnInit {
   senha:string
   confirmacaoSenha:string
 
-  seguradoPlano : SeguradoPlano
+  seguradoPlano: Array<SeguradoPlano>;
+  segurado : Segurado;
+  seguradoEndereco : SeguradoEndereco;
+  
 
   constructor(private seguradoService : SeguradoService) { }
 
 
   ngOnInit() {
+
+    this.segurado = new Segurado();
+    this.segurado.nome = 'Aiello';
+    this.segurado.cpf = '000000000';
+
+    this.seguradoEndereco = new SeguradoEndereco();
+    this.seguradoEndereco.cep = '999999';
+
+    this.segurado.endereco = this.seguradoEndereco;
+
+    var json = JSON.stringify(this.segurado);
+    console.log(json);
+     this.seguradoService.planos().
+            subscribe(seguradoPlano => {
+              this.seguradoPlano = seguradoPlano;
+
+              console.log('Plano ' + this.seguradoPlano[0].nome);
+              console.log('Plano ' + this.seguradoPlano[0].id);
+              
+            }
+          )       
+
+
   }
 
   criarSegurado(){
+
+   
+
+
    /* console.log(this.cpf);
     console.log(this.nome);
     console.log(this.dataNascimento);
@@ -48,18 +81,7 @@ export class SeguradoLoginRegisterComponent implements OnInit {
     console.log(this.senha);
     console.log(this.confirmacaoSenha);*/
 
-    console.log('Executando o metodo de localizacao de endereco pelo cep => ' + this.cep)
-    this.seguradoService.planos().
-            subscribe(seguradoPlano => {
-              this.seguradoPlano.id = seguradoPlano.id;
-              this.seguradoPlano.nome = seguradoPlano.nome
-              this.seguradoPlano.tipo = seguradoPlano.tipo
-
-              console.log('Plano ' + this.seguradoPlano.nome)
-              
-            }
-          )       
-
+   
 
 
   }
