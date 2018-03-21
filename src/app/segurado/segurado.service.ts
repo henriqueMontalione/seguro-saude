@@ -1,14 +1,12 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
-import 'rxjs/add/operator/map'
 import 'rxjs/add/operator/catch'
-import { ENDERECO_SERVICE } from "../../app.api";
+import { ENDERECO_SERVICE, PLANO_SERVICE } from "../../app.api";
 import { ErrorHandler } from "../app.error-handle";
 import { SeguradoEndereco } from "./segurado-endereco.model";
-import { RequestOptions } from '@angular/http';
 
-import { Headers } from '@angular/http';
+import { SeguradoPlano } from "./segurado-plano.model";
 
 
 
@@ -29,7 +27,15 @@ export class SeguradoService{
     enderecoByCep(cep: string) : Observable<SeguradoEndereco> { 
     
         console.log('Acessando a URL => ' + `${ENDERECO_SERVICE}${cep}`)
+
         return this.httpClient.get<SeguradoEndereco[]>(`${ENDERECO_SERVICE}${cep}`, {headers : this._headers}).
+        catch(ErrorHandler.handleError)
+    }
+
+    planos() : Observable<SeguradoPlano> { 
+    
+        console.log('Acessando a URL => ' + `${PLANO_SERVICE}`)
+        return this.httpClient.get<SeguradoPlano[]>(`${PLANO_SERVICE}`, {headers : this._headers}).
         catch(ErrorHandler.handleError)
     }
 

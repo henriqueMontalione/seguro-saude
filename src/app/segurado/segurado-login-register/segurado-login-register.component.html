@@ -92,13 +92,24 @@
                                 </div>
                             </div>
                             <div class="row">
-                                  <div class="col-md-12">
+                                  <div class="col-md-6">
                                       <div class="form-group form-black label-floating is-empty">
                                           <label class="control-label">Complemento</label>
                                           <input type="text" name="complemento" [(ngModel)]="complemento" class="form-control">
                                       </div>
                                   </div>
-                                 
+
+                                  <div class="col-md-6">
+                                        <div class="form-group form-black label-floating is-empty" >
+                                            <label class="control-label">Plano</label>
+                                            <select class="form-control" [(ngModel)]="plano" name="plano">
+                                                <option></option>
+                                                <option>Plano Premium</option>
+                                                <option>Plano Basic</option>
+                                            </select>
+                                        </div>
+                                  </div>
+                                
                               </div>
                               <div class="row">
                                     <div class="col-md-6">
@@ -113,7 +124,7 @@
                                                 <input type="password" name="confirmacaoSenha" [(ngModel)]="confirmacaoSenha" class="form-control">
                                             </div>
                                         </div>
-                                </div>  
+                                    </div>  
                             <button type="submit" class="btn btn-danger pull-right">Salvar</button>
                             <div class="clearfix"></div>
                         </form>

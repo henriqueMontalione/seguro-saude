@@ -26,11 +26,12 @@ export class SeguradoProfileComponent implements OnInit {
     this.seguradoService.enderecoByCep(this.cep).
             subscribe(seguradoEndereco => {
               this.logradouro = seguradoEndereco.logradouro;
+              console.log(seguradoEndereco.logradouro)
               this.bairro = seguradoEndereco.bairro
               this.cidade = seguradoEndereco.cidade
               this.uf = seguradoEndereco.uf
             }
-          ) 
+          )       
   }
 
 }
