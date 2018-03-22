@@ -7,6 +7,32 @@
                         <h4 class="title">Rede Referenciada</h4>
                         <p class="category">Clínicas, Consultórios, Médicos e Laboratórios.</p>
                     </div>
+
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3">                             
+                                <select class="form-control form-control-sm">
+                                    <option value="" selected disabled hidden>Especialidade</option>
+                                    <option *ngFor=" let especialidade of listaEspecialidade" [value]="especialidade.id">{{especialidade.nome}}</option> 
+                                </select>
+                            </div>
+                            <div class="col-md-3">                             
+                                    <select class="form-control form-control-sm">
+                                        <option value="" selected disabled hidden>Bairro</option>
+                                        <option *ngFor=" let especialidade of listaEspecialidade" [value]="especialidade.id">{{especialidade.nome}}</option> 
+                                    </select>
+                                </div>
+                        </div>
+                    </div>
+
+                
+
+
+
+
+
+
+
                     <div class="card-content table-responsive">
                         <table class="table">
                             <thead class="text-danger">
