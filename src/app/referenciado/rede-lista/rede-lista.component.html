@@ -11,27 +11,19 @@
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-3">                             
-                                <select class="form-control form-control-sm">
+                                <select class="form-control form-control-sm" [(ngModel)]="especialidadeId">
                                     <option value="" selected disabled hidden>Especialidade</option>
-                                    <option *ngFor=" let especialidade of listaEspecialidade" [value]="especialidade.id">{{especialidade.nome}}</option> 
+                                    <option *ngFor=" let esp of listaEspecialidade" value="{{esp.id}}">{{esp.nome}}</option> 
                                 </select>
                             </div>
                             <div class="col-md-3">                             
-                                    <select class="form-control form-control-sm">
+                                    <select class="form-control form-control-sm"  [(ngModel)]="localizacaoId">
                                         <option value="" selected disabled hidden>Bairro</option>
-                                        <option *ngFor=" let localizacao of listaLocalizacao" [value]="localizacao.bairro">{{localizacao.bairro}}</option> 
+                                        <option *ngFor=" let loc of listaLocalizacao" >{{loc.bairro}}</option> 
                                     </select>
                                 </div>
                         </div>
                     </div>
-
-                
-
-
-
-
-
-
 
                     <div class="card-content table-responsive">
                         <table class="table">
@@ -43,44 +35,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Dakota Rice</td>
-                                    <td>Niger</td>
-                                    <td>Oud-Turnhout</td>                                </tr>
-                                <tr>
-                                    <td>Minerva Hooper</td>
-                                    <td>Curaçao</td>
-                                    <td>Sinaai-Waas</td>
-                                </tr>
-                                <tr>
-                                    <td>Sage Rodriguez</td>
-                                    <td>Netherlands</td>
-                                    <td>Baileux</td>
-                                </tr>
-                                <tr>
-                                    <td>Philip Chaney</td>
-                                    <td>Korea, South</td>
-                                    <td>Overland Park</td>
-                                </tr>
-                                <tr>
-                                    <td>Doris Greene</td>
-                                    <td>Malawi</td>
-                                    <td>Feldkirchen in Kärnten</td>
-                                </tr>
-                                <tr>
-                                    <td>Mason Porter</td>
-                                    <td>Chile</td>
-                                    <td>Gloucester</td>
+                                <tr *ngFor="let ref of listaReferenciado">
+                                    <td>{{ref.nome}}</td>
+                                    <td>{{ref.especialidade.nome}}</td>
+                                    <td>{{ref.endereco.bairro}}</td>                                
                                 </tr>
                             </tbody>
                         </table>
-
                     </div>
                 </div>
             </div>
-
-            
-           
         </div>
     </div>
 </div>

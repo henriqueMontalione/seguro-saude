@@ -2,6 +2,7 @@ import { ReferenciadoLocalizacao } from './../../shared/referenciadoLocalizacao.
 import { ReferenciadoEspecialidade } from '../../shared/referenciadoEspecialidade.model';
 import { ReferenciadoService } from './../referenciado.service';
 import { Component, OnInit } from '@angular/core';
+import { Referenciado } from '../../shared/referenciado.model';
 
 @Component({
   selector: 'app-rede-lista',
@@ -15,6 +16,11 @@ export class RedeListaComponent implements OnInit {
   referenciadoLocalizacao: ReferenciadoLocalizacao;
   listaLocalizacao: Array<ReferenciadoLocalizacao>;
 
+  referenciado: Referenciado;
+  listaReferenciado: Array<Referenciado>;
+
+  localizacao: string;
+  especialidadeId: string;
 
   constructor(private referenciadoService: ReferenciadoService) { }
 
@@ -33,6 +39,15 @@ export class RedeListaComponent implements OnInit {
         console.log(this.listaLocalizacao);
         console.log('bairro: ' + this.listaLocalizacao[0].bairro);
       });
+
+      this.referenciadoService.getReferenciado(this.especialidadeId).
+      subscribe(referenciado => {
+        this.listaReferenciado = referenciado;
+        console.log(this.listaReferenciado);
+        console.log('Referenciado: ' + this.listaReferenciado[0]);
+      });
   }
+
+  
 
 }

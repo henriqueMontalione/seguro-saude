@@ -1,4 +1,5 @@
-import { LOCALIZACAO_SERVICE_SWAGGER, LOCALIZACAO_SERVICE } from './../../app.api';
+import { Referenciado } from './../shared/referenciado.model';
+import { LOCALIZACAO_SERVICE_SWAGGER, LOCALIZACAO_SERVICE, REFERENCIADO_SERVICE } from './../../app.api';
 import { ReferenciadoLocalizacao } from './../shared/referenciadoLocalizacao.model';
 import { Injectable } from '@angular/core';
 import { ReferenciadoEspecialidade } from '../shared/referenciadoEspecialidade.model';
@@ -17,8 +18,8 @@ export class ReferenciadoService {
     constructor(private httpClient: HttpClient) {}
 
     getEspecialidade(): Observable<ReferenciadoEspecialidade[]> {
-        console.log('Acessando a URL => ' + `${ESPECIALIDADE_SERVICE}especialidade`);
-        return this.httpClient.get<ReferenciadoEspecialidade[]>(`${ESPECIALIDADE_SERVICE}especialidade`, {headers : this._headers}).
+        console.log('Acessando a URL => ' + `${ESPECIALIDADE_SERVICE}`);
+        return this.httpClient.get<ReferenciadoEspecialidade[]>(`${ESPECIALIDADE_SERVICE}`, {headers : this._headers}).
         catch(ErrorHandler.handleError);
     }
 
@@ -29,4 +30,10 @@ export class ReferenciadoService {
         catch(ErrorHandler.handleError);
     }
 
+    getReferenciado(especialidadeId: string): Observable<Referenciado[]> {
+        console.log('Acessando a URL => ' + `${REFERENCIADO_SERVICE}${especialidadeId}`);
+        return this.httpClient
+        .get<Referenciado[]>(`${REFERENCIADO_SERVICE}${especialidadeId}`, {headers : this._headers}).
+        catch(ErrorHandler.handleError);
+    }
 }
