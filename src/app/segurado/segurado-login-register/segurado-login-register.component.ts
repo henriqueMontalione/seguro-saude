@@ -12,77 +12,81 @@ import { SeguradoEndereco } from '../segurado-endereco.model';
 })
 export class SeguradoLoginRegisterComponent implements OnInit {
 
-  cpf:string
-  nome:string
-  dataNascimento:String
-  email:string
-  sexo:string
-  cep:string
-  numero:string
-  bairro:string
-  cidade:string
-  uf:string
-  complemento:string
-  logradouro:string
-  senha:string
-  confirmacaoSenha:string
+  /* Atributos dos formularios */
+  cpf:string;
+  nome:string;
+  dataNascimento:string;
+  email:string;
+  sexo:string;
+  cep:string;
+  numero:string;
+  bairro:string;
+  cidade:string;
+  uf:string;
+  complemento:string;
+  logradouro:string;
+  senha:string;
+  confirmacaoSenha:string;
+  planoId: string;
+  telefone : string;
 
-  seguradoPlano: Array<SeguradoPlano>;
   segurado : Segurado;
   seguradoEndereco : SeguradoEndereco;
+  seguradoPlanos: Array<SeguradoPlano>;
   
-
   constructor(private seguradoService : SeguradoService) { }
 
-
   ngOnInit() {
-
-    this.segurado = new Segurado();
-    this.segurado.nome = 'Aiello';
-    this.segurado.cpf = '000000000';
-
-    this.seguradoEndereco = new SeguradoEndereco();
-    this.seguradoEndereco.cep = '999999';
-
-    this.segurado.endereco = this.seguradoEndereco;
-
-    var json = JSON.stringify(this.segurado);
-    console.log(json);
+     //Carregando os planos 
      this.seguradoService.planos().
-            subscribe(seguradoPlano => {
-              this.seguradoPlano = seguradoPlano;
-
-              console.log('Plano ' + this.seguradoPlano[0].nome);
-              console.log('Plano ' + this.seguradoPlano[0].id);
-              
+            subscribe(seguradoPlanos => {
+              this.seguradoPlanos = seguradoPlanos;
             }
           )       
 
 
   }
 
+  buscaCep(){
+    console.log('Executando o metodo de localizacao de endereco pelo cep => ' + this.cep)
+    this.seguradoService.enderecoByCep(this.cep).
+            subscribe(seguradoEndereco => {
+              this.logradouro = seguradoEndereco.logradouro;
+              console.log(seguradoEndereco.logradouro)
+              this.bairro = seguradoEndereco.bairro
+              this.cidade = seguradoEndereco.cidade
+              this.uf = seguradoEndereco.uf
+            }
+          )       
+  }
+
   criarSegurado(){
 
-   
+    this.segurado = new Segurado();
+    this.segurado.nome = this.nome;
+    this.segurado.cpf = this.cpf;
+    this.segurado.dataNascimento = this.dataNascimento;
+    this.segurado.email = this.email;
+    this.segurado.planoId = this.planoId;
+    this.segurado.senha = this.senha;
+    this.segurado.telefone = this.telefone;
+
+    this.seguradoEndereco = new SeguradoEndereco();
+    this.seguradoEndereco.cep = this.cep;
+    this.seguradoEndereco.bairro = this.bairro;
+    this.seguradoEndereco.cidade = this.cidade;
+    this.seguradoEndereco.logradouro = this.logradouro;
+    this.seguradoEndereco.numero = this.numero;
+    this.seguradoEndereco.uf = this.uf;
+
+    this.segurado.endereco = this.seguradoEndereco;
 
 
-   /* console.log(this.cpf);
-    console.log(this.nome);
-    console.log(this.dataNascimento);
-    console.log(this.email);
-    console.log(this.sexo);
-    console.log(this.logradouro);
-    console.log(this.cep);
-    console.log(this.numero);
-    console.log(this.bairro);
-    console.log(this.cidade);
-    console.log(this.uf);
-    console.log(this.complemento);
-    console.log(this.senha);
-    console.log(this.confirmacaoSenha);*/
+    var bodySeguradoJson = JSON.stringify(this.segurado);
+    console.log(bodySeguradoJson);
 
-   
-
+    this.seguradoService.criarSegurado(this.segurado)
+    .subscribe(segurado => console.log(segurado.nome))
 
   }
 

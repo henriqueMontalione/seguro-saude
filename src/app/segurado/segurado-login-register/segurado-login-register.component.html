@@ -51,7 +51,6 @@
                                           </select>
                                       </div>
                                 </div>
-          
                             </div>
     
                             <div class="row">
@@ -93,23 +92,32 @@
                                 </div>
                             </div>
                             <div class="row">
-                                  <div class="col-md-6">
+                                  <div class="col-md-5">
                                       <div class="form-group form-black label-floating is-empty">
                                           <label class="control-label">Complemento</label>
                                           <input type="text" autocomplete="off" name="complemento" [(ngModel)]="complemento" class="form-control">
                                       </div>
                                   </div>
 
-                                  <div class="col-md-6">
+                                  <div class="col-md-4">
                                         <div class="form-group form-black label-floating is-empty" >
                                             <label class="control-label">Plano</label>
-                                            <select class="form-control" required [(ngModel)]="plano" name="plano">
+                                            <select class="form-control" required [(ngModel)]="planoId" name="planoId">
                                                 <option></option>
-                                                <option>Plano Premium</option>
-                                                <option>Plano Basic</option>
+                                                <option *ngFor="let p of seguradoPlanos" value="{{p.id}}">
+                                                        {{p.nome}}
+                                                </option>
+                                                
                                             </select>
                                         </div>
                                   </div>
+
+                                  <div class="col-md-3">
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label class="control-label">Telefone</label>
+                                        <input type="text"  mask="(00)0000-0000" autocomplete="off" required [(ngModel)]="telefone" name="telefone" class="form-control" >
+                                    </div>
+                                </div>
                                 
                               </div>
                               <div class="row">
