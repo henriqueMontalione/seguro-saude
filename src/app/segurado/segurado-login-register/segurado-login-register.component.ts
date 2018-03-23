@@ -33,14 +33,22 @@ export class SeguradoLoginRegisterComponent implements OnInit {
   segurado : Segurado;
   endereco : Endereco;
   seguradoPlanos: Array<SeguradoPlano>;
+
+  mensagemErro : string;
   
   constructor(private seguradoService : SeguradoService) { }
 
   ngOnInit() {
+
+    console.log('[Seguro Saude] - Executando o metodo de carga de plano.');
+
      //Carregando os planos 
      this.seguradoService.planos().
             subscribe(seguradoPlanos => {
               this.seguradoPlanos = seguradoPlanos;
+            }, 
+            error => {
+              this.mensagemErro = 'Não foram localizados Planos ou o serviço esta fora do ar.';
             }
           )       
 
@@ -48,19 +56,25 @@ export class SeguradoLoginRegisterComponent implements OnInit {
   }
 
   buscaCep(){
-    console.log('Executando o metodo de localizacao de endereco pelo cep => ' + this.cep)
+    console.log('[Seguro Saude] - Executando o metodo de localizacao de endereco pelo cep => ' + this.cep + ' .');
+    
     this.seguradoService.enderecoByCep(this.cep).
             subscribe(endereco => {
               this.logradouro = endereco.logradouro;
-              console.log(endereco.logradouro)
-              this.bairro = endereco.bairro
-              this.cidade = endereco.cidade
-              this.uf = endereco.uf
+              this.bairro = endereco.bairro;
+              this.cidade = endereco.cidade;
+              this.uf = endereco.uf;
+              this.mensagemErro = '';
+            }, 
+            error => {
+              this.mensagemErro = 'O CEP não foi localizado ou o serviço esta fora do ar.';
             }
           )       
   }
 
   criarSegurado(){
+
+    console.log('[Seguro Saude] -  Criando usuario de nome : ' + this.nome + ' .');
 
     this.segurado = new Segurado();
     this.segurado.nome = this.nome;
@@ -79,15 +93,14 @@ export class SeguradoLoginRegisterComponent implements OnInit {
     this.endereco.numero = this.numero;
     this.endereco.uf = this.uf;
 
-
     this.segurado.endereco = this.endereco;
 
-
-    var bodySeguradoJson = JSON.stringify(this.segurado);
-    console.log(bodySeguradoJson);
+    //var bodySeguradoJson = JSON.stringify(this.segurado);
+    //console.log(bodySeguradoJson);
 
     this.seguradoService.criarSegurado(this.segurado)
-    .subscribe(segurado => console.log(segurado.nome))
+    .subscribe(segurado => 
+      console.log('[Segurod Saude] Segurado cadastrado nome : ' + segurado.nome + ' .'));
 
   }
 
