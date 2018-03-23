@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SeguradoEndereco } from '../segurado-endereco.model';
 import { SeguradoService } from '../segurado.service';
+import { Endereco } from '../../shared/endereco.model';
 
 @Component({
   selector: 'app-segurado-profile',
@@ -8,7 +8,7 @@ import { SeguradoService } from '../segurado.service';
 })
 export class SeguradoProfileComponent implements OnInit {
 
-  seguradoEndereco : SeguradoEndereco
+  endereco : Endereco
   cep: string
   logradouro:string
   bairro : string
@@ -24,12 +24,12 @@ export class SeguradoProfileComponent implements OnInit {
   buscaCep(){
     console.log('Executando o metodo de localizacao de endereco pelo cep => ' + this.cep)
     this.seguradoService.enderecoByCep(this.cep).
-            subscribe(seguradoEndereco => {
-              this.logradouro = seguradoEndereco.logradouro;
-              console.log(seguradoEndereco.logradouro)
-              this.bairro = seguradoEndereco.bairro
-              this.cidade = seguradoEndereco.cidade
-              this.uf = seguradoEndereco.uf
+            subscribe(endereco => {
+              this.logradouro = endereco.logradouro;
+              console.log(endereco.logradouro)
+              this.bairro = endereco.bairro
+              this.cidade = endereco.cidade
+              this.uf = endereco.uf
             }
           )       
   }

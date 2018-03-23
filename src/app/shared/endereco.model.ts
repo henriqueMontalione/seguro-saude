@@ -1,4 +1,4 @@
-export class SeguradoEndereco{
+export class Endereco{
 
         constructor(){}
 

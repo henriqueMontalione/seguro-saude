@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SeguradoService } from '../segurado.service';
-import { SeguradoPlano } from '../segurado-plano.model';
 import {Segurado} from '../segurado.model'
-import { SeguradoEndereco } from '../segurado-endereco.model';
+import { Endereco } from '../../shared/endereco.model';
+import { SeguradoPlano } from '../../shared/segurado-plano.model';
 
 
 @Component({
@@ -31,7 +31,7 @@ export class SeguradoLoginRegisterComponent implements OnInit {
   telefone : string;
 
   segurado : Segurado;
-  seguradoEndereco : SeguradoEndereco;
+  endereco : Endereco;
   seguradoPlanos: Array<SeguradoPlano>;
   
   constructor(private seguradoService : SeguradoService) { }
@@ -50,12 +50,12 @@ export class SeguradoLoginRegisterComponent implements OnInit {
   buscaCep(){
     console.log('Executando o metodo de localizacao de endereco pelo cep => ' + this.cep)
     this.seguradoService.enderecoByCep(this.cep).
-            subscribe(seguradoEndereco => {
-              this.logradouro = seguradoEndereco.logradouro;
-              console.log(seguradoEndereco.logradouro)
-              this.bairro = seguradoEndereco.bairro
-              this.cidade = seguradoEndereco.cidade
-              this.uf = seguradoEndereco.uf
+            subscribe(endereco => {
+              this.logradouro = endereco.logradouro;
+              console.log(endereco.logradouro)
+              this.bairro = endereco.bairro
+              this.cidade = endereco.cidade
+              this.uf = endereco.uf
             }
           )       
   }
@@ -71,15 +71,16 @@ export class SeguradoLoginRegisterComponent implements OnInit {
     this.segurado.senha = this.senha;
     this.segurado.telefone = this.telefone;
 
-    this.seguradoEndereco = new SeguradoEndereco();
-    this.seguradoEndereco.cep = this.cep;
-    this.seguradoEndereco.bairro = this.bairro;
-    this.seguradoEndereco.cidade = this.cidade;
-    this.seguradoEndereco.logradouro = this.logradouro;
-    this.seguradoEndereco.numero = this.numero;
-    this.seguradoEndereco.uf = this.uf;
+    this.endereco = new Endereco();
+    this.endereco.cep = this.cep;
+    this.endereco.bairro = this.bairro;
+    this.endereco.cidade = this.cidade;
+    this.endereco.logradouro = this.logradouro;
+    this.endereco.numero = this.numero;
+    this.endereco.uf = this.uf;
 
-    this.segurado.endereco = this.seguradoEndereco;
+
+    this.segurado.endereco = this.endereco;
 
 
     var bodySeguradoJson = JSON.stringify(this.segurado);

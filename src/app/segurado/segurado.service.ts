@@ -4,10 +4,9 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/catch'
 import { ENDERECO_SERVICE, PLANO_SERVICE } from "../../app.api";
 import { ErrorHandler } from "../app.error-handle";
-import { SeguradoEndereco } from "./segurado-endereco.model";
-
-import { SeguradoPlano } from "./segurado-plano.model";
 import { Segurado } from "./segurado.model";
+import { SeguradoPlano } from "../shared/segurado-plano.model";
+import { Endereco } from "../shared/endereco.model";
 
 
 
@@ -40,11 +39,11 @@ export class SeguradoService{
 
     constructor(private httpClient: HttpClient){}
 
-    enderecoByCep(cep: string) : Observable<SeguradoEndereco> { 
+    enderecoByCep(cep: string) : Observable<Endereco> { 
     
         console.log('Acessando a URL => ' + `${ENDERECO_SERVICE}${cep}`)
 
-        return this.httpClient.get<SeguradoEndereco[]>(`${ENDERECO_SERVICE}${cep}`, {headers : this._headers}).
+        return this.httpClient.get<Endereco[]>(`${ENDERECO_SERVICE}${cep}`, {headers : this._headers}).
         catch(ErrorHandler.handleError)
     }
 
