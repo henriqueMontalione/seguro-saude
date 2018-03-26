@@ -97,7 +97,7 @@
                                   <div class="col-md-8">
                                       <div class="form-group form-black label-floating is-empty">
                                           <label class="control-label">Complemento</label>
-                                          <input type="text" maxlength="50" autocomplete="off" name="complemento" [(ngModel)]="complemento" class="form-control">
+                                          <input type="text" required maxlength="50" autocomplete="off" name="complemento" [(ngModel)]="complemento" class="form-control">
                                       </div>
                                   </div>
 
@@ -158,7 +158,7 @@
                                             <input type="password" maxlength="20" required class="form-control">
                                         </div>
                                         <div class="form-group form-black label-floating is-empty">
-                                        <a href="#" class="btn btn-danger btn-round">Entrar</a>
+                                        <a href="#" (click)="temp()" class="btn btn-danger btn-round">Entrar</a>
                                     </div>
 
                                 </form>

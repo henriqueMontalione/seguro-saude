@@ -5,10 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { SeguradoProfileComponent } from './segurado/segurado-profile/segurado-profile.component';
 import { RedeListaComponent } from './referenciado/rede-lista/rede-lista.component';
 import { SeguradoLoginRegisterComponent } from './segurado/segurado-login-register/segurado-login-register.component';
+import { SeguradoViewComponent } from './segurado/segurado-view/segurado-view.component';
 
 export const ROUTES: Routes  =[
                       { path: '', component: SeguradoLoginRegisterComponent},
                       { path : 'segurado-profile', component : SeguradoProfileComponent},
+                      { path : 'segurado-view', component : SeguradoViewComponent},
                       { path : 'rede-lista', component : RedeListaComponent}
                     ]
 

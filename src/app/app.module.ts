@@ -20,7 +20,10 @@ import { RedeListaComponent } from './referenciado/rede-lista/rede-lista.compone
 import { SeguradoLoginRegisterComponent } from './segurado/segurado-login-register/segurado-login-register.component'
 import { ReferenciadoService } from './referenciado/referenciado.service';
 
-import {NgxMaskModule} from 'ngx-mask'
+import { StorageServiceModule} from 'angular-webstorage-service';
+
+import {NgxMaskModule} from 'ngx-mask';
+import { SeguradoViewComponent } from './segurado/segurado-view/segurado-view.component'
 
 
 @NgModule({
@@ -30,7 +33,8 @@ import {NgxMaskModule} from 'ngx-mask'
     SeguradoProfileComponent,
     ReferenciadoComponent,
     RedeListaComponent,
-    SeguradoLoginRegisterComponent
+    SeguradoLoginRegisterComponent,
+    SeguradoViewComponent
     
   ],
   imports: [
@@ -39,7 +43,8 @@ import {NgxMaskModule} from 'ngx-mask'
     HttpClientModule,
     RouterModule.forRoot(ROUTES),
     FormsModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    StorageServiceModule
   ],
   providers: [SeguradoService, ReferenciadoService],
   bootstrap: [AppComponent]

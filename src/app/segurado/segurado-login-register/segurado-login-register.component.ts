@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SeguradoService } from '../segurado.service';
 import {Segurado} from '../segurado.model'
 import { Endereco } from '../../shared/endereco.model';
 import { SeguradoPlano } from '../../shared/segurado-plano.model';
+import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -13,37 +15,42 @@ import { SeguradoPlano } from '../../shared/segurado-plano.model';
 export class SeguradoLoginRegisterComponent implements OnInit {
 
   /* Atributos dos formularios */
-  cpf:string;
-  nome:string;
-  dataNascimento:string;
-  email:string;
-  sexo:string;
-  cep:string;
-  numero:string;
-  bairro:string;
-  cidade:string;
-  uf:string;
-  complemento:string;
-  logradouro:string;
-  senha:string;
-  confirmacaoSenha:string;
-  planoId: string;
-  telefone : string;
+  private cpf:string;
+  private nome:string;
+  private dataNascimento:string;
+  private email:string;
+  private sexo:string;
+  private cep:string;
+  private numero:string;
+  private bairro:string;
+  private cidade:string;
+  private uf:string;
+  private complemento:string;
+  private logradouro:string;
+  private senha:string;
+  private confirmacaoSenha:string;
+  private planoId: string;
+  private telefone : string;
 
-  segurado : Segurado;
-  endereco : Endereco;
-  seguradoPlanos: Array<SeguradoPlano>;
+  private segurado : Segurado;
+  private endereco : Endereco;
+  private seguradoPlanos: Array<SeguradoPlano>;
 
-  mensagemErro : string;
-  
-  constructor(private seguradoService : SeguradoService) { }
+  private mensagemErro : string;
+
+  public USER_DATA:any=[];
+
+
+  constructor(private seguradoService : SeguradoService , 
+    @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
 
     console.log('[Seguro Saude] - Executando o metodo de carga de plano.');
 
      //Carregando os planos 
-     this.seguradoService.planos().
+     this.seguradoService.getPlanos().
             subscribe(seguradoPlanos => {
               this.seguradoPlanos = seguradoPlanos;
             }, 
@@ -51,14 +58,13 @@ export class SeguradoLoginRegisterComponent implements OnInit {
               this.mensagemErro = 'Não foram localizados Planos ou o serviço esta fora do ar.';
             }
           )       
-
-
+          console.log('oi');
   }
 
   buscaCep(){
     console.log('[Seguro Saude] - Executando o metodo de localizacao de endereco pelo cep => ' + this.cep + ' .');
     
-    this.seguradoService.enderecoByCep(this.cep).
+    this.seguradoService.getEnderecoByCep(this.cep).
             subscribe(endereco => {
               this.logradouro = endereco.logradouro;
               this.bairro = endereco.bairro;
@@ -97,11 +103,36 @@ export class SeguradoLoginRegisterComponent implements OnInit {
 
     //var bodySeguradoJson = JSON.stringify(this.segurado);
     //console.log(bodySeguradoJson);
+    
 
-    this.seguradoService.criarSegurado(this.segurado)
-    .subscribe(segurado => 
-      console.log('[Segurod Saude] Segurado cadastrado nome : ' + segurado.nome + ' .'));
+    this.seguradoService.saveSegurado(this.segurado)
+    .subscribe(segurado => {
+              console.log('[Segurado Saude] Segurado cadastrado CPF : ' + segurado.cpf + ' .')
+              this.storage.set('cpf', '00000');
+
+              console.log('Set' + this.storage.get('cpf') );
+             this.USER_DATA['cpf']= this.storage.get('cpf');
+
+
+              this.USER_DATA['cpf']= this.storage.get('cpf');
+              console.log('Recuperando login' + this.USER_DATA['cpf']);
+
+              this.router.navigate(['segurado-view']);
+           } 
+      );
+  }
+
+
+  temp(){
+
+    console.log('Setando o cpf');
+    this.storage.set('cpf', '07994392741');
+
+    //this.storage.set('planoId', '1');
+    this.storage.get('planoId');
+
 
   }
+  
 
 }

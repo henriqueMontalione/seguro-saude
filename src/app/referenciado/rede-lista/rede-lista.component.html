@@ -7,23 +7,30 @@
                         <h4 class="title">Rede Referenciada</h4>
                         <p class="category">Clínicas, Consultórios, Médicos e Laboratórios.</p>
                     </div>
-
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-3">                             
-                                <select class="form-control form-control-sm" [(ngModel)]="especialidadeId">
-                                    <option value="" selected disabled hidden>Especialidade</option>
-                                    <option *ngFor=" let esp of listaEspecialidade" value="{{esp.id}}">{{esp.nome}}</option> 
-                                </select>
-                            </div>
-                            <div class="col-md-3">                             
-                                    <select class="form-control form-control-sm"  [(ngModel)]="localizacaoId">
-                                        <option value="" selected disabled hidden>Bairro</option>
-                                        <option *ngFor=" let loc of listaLocalizacao" >{{loc.bairro}}</option> 
-                                    </select>
+                    
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-3">      
+                                    <div class="form-group form-black label-floating is-empty">
+                                        <label class="control-label">Especialidade</label>                       
+                                        <select class="form-control form-control-sm"  (change)="pesquisar()" [(ngModel)]="especialidadeId">
+                                            <option value=""></option>
+                                            <option *ngFor=" let esp of listaEspecialidade" value="{{esp.id}}">{{esp.nome}}</option> 
+                                        </select>
+                                    </div>
                                 </div>
+                                <div class="col-md-3">   
+                                        <div class="form-group form-black label-floating is-empty"> 
+                                            <label class="control-label">Localização</label>                            
+                                            <select class="form-control form-control-sm" (change)="pesquisar()" [(ngModel)]="localizacaoId">
+                                                <option value=""></option>
+                                                <option *ngFor=" let loc of listaLocalizacao" >{{loc.bairro}}</option> 
+                                            </select>
+                                        </div>
+                                    </div>
+                            </div>
                         </div>
-                    </div>
+                  
 
                     <div class="card-content table-responsive">
                         <table class="table">

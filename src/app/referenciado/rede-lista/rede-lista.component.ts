@@ -40,12 +40,22 @@ export class RedeListaComponent implements OnInit {
         console.log('bairro: ' + this.listaLocalizacao[0].bairro);
       });
 
-      this.referenciadoService.getReferenciado(this.especialidadeId).
-      subscribe(referenciado => {
-        this.listaReferenciado = referenciado;
-        console.log(this.listaReferenciado);
-        console.log('Referenciado: ' + this.listaReferenciado[0]);
-      });
+
+  }
+
+  pesquisar(){
+
+    if (this.especialidadeId == undefined) return;
+
+    console.log('Especialidade : ' +this.especialidadeId);
+
+    this.referenciadoService.getReferenciado(this.especialidadeId).
+    subscribe(referenciado => {
+      this.listaReferenciado = referenciado;
+      console.log(this.listaReferenciado);
+      console.log('Referenciado: ' + this.listaReferenciado[0]);
+    });
+
   }
 
   
