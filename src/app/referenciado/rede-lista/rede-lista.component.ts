@@ -20,17 +20,24 @@ export class RedeListaComponent implements OnInit {
   listaReferenciado: Array<Referenciado>;
 
   localizacao: string;
-  especialidadeId: string;
+  especialidadeId: string = '';
+  bairro: string = '';
 
-  constructor(private referenciadoService: ReferenciadoService) { }
+  private mensagemErro: string;
+
+  constructor(private referenciadoService: ReferenciadoService) {}
 
   ngOnInit() {
+
     this.referenciadoService.getEspecialidade().
       subscribe(referenciadoEspecialidade => {
         this.listaEspecialidade = referenciadoEspecialidade;
         console.log(this.listaEspecialidade);
         console.log('ID: ' + this.listaEspecialidade[0].id);
         console.log('NOME: ' + this.listaEspecialidade[0].nome);
+      },
+      error => {
+        this.mensagemErro = 'O serviço de Especialidade está fora do ar.';
       });
       
       this.referenciadoService.getLocalizacao().
@@ -38,26 +45,32 @@ export class RedeListaComponent implements OnInit {
         this.listaLocalizacao = referenciadoLocalizacao;
         console.log(this.listaLocalizacao);
         console.log('bairro: ' + this.listaLocalizacao[0].bairro);
+      },
+      error => {
+        this.mensagemErro = 'O serviço de Localização está fora do ar.';
       });
 
 
   }
 
-  pesquisar(){
+  pesquisar() {
 
     if (this.especialidadeId == undefined) return;
 
-    console.log('Especialidade : ' +this.especialidadeId);
+    console.log('Especialidade : ' + this.especialidadeId);
 
-    this.referenciadoService.getReferenciado(this.especialidadeId).
+    this.referenciadoService.getReferenciado(this.especialidadeId, this.bairro).
     subscribe(referenciado => {
       this.listaReferenciado = referenciado;
       console.log(this.listaReferenciado);
       console.log('Referenciado: ' + this.listaReferenciado[0]);
+    },
+    error => {
+      this.mensagemErro = 'O serviço de Referenciado está fora do ar.';
     });
 
   }
 
-  
+
 
 }

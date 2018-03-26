@@ -6,9 +6,12 @@
                     <div class="card-header" data-background-color="red">
                         <h4 class="title">Rede Referenciada</h4>
                         <p class="category">Clínicas, Consultórios, Médicos e Laboratórios.</p>
-                    </div>
-                    
+                    </div>                    
+
                         <div class="container-fluid">
+                            <div class="alert alert-danger " [hidden]="!mensagemErro">
+                                <span>{{mensagemErro}}</span>
+                            </div>
                             <div class="row">
                                 <div class="col-md-3">      
                                     <div class="form-group form-black label-floating is-empty">
@@ -22,9 +25,9 @@
                                 <div class="col-md-3">   
                                         <div class="form-group form-black label-floating is-empty"> 
                                             <label class="control-label">Localização</label>                            
-                                            <select class="form-control form-control-sm" (change)="pesquisar()" [(ngModel)]="localizacaoId">
+                                            <select class="form-control form-control-sm" (change)="pesquisar()" [(ngModel)]="bairro">
                                                 <option value=""></option>
-                                                <option *ngFor=" let loc of listaLocalizacao" >{{loc.bairro}}</option> 
+                                                <option *ngFor=" let loc of listaLocalizacao" value="{{loc.bairro}}">{{loc.bairro}}</option> 
                                             </select>
                                         </div>
                                     </div>

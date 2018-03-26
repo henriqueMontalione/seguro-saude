@@ -23,14 +23,14 @@ export class ReferenciadoService {
     getLocalizacao(): Observable<ReferenciadoLocalizacao[]> {
         console.log('[Seguro Saude] - Acessando a URL => ' + `${LOCALIZACAO_GET_SERVICE}/1/cidade/rio de janeiro/bairro .`);
         return this.httpClient
-        .get<ReferenciadoLocalizacao[]>(`${LOCALIZACAO_GET_SERVICE}/1/cidade/rio de janeiro/bairro`, {headers : _headers_get}).
+        .get<ReferenciadoLocalizacao[]>(`${LOCALIZACAO_GET_SERVICE}/5/cidade/rio de janeiro/bairro`, {headers : _headers_get}).
         catch(ErrorHandler.handleError);
     }
 
-    getReferenciado(especialidadeId: string): Observable<Referenciado[]> {
+    getReferenciado(especialidadeId: string, bairro: string): Observable<Referenciado[]> {
         console.log('[Seguro Saude] - Acessando a URL => ' + `${REFERENCIADO_GET_SERVICE}${especialidadeId} .` );
         return this.httpClient
-        .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}${especialidadeId}`, {headers : _headers_get}).
+        .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}${especialidadeId}&bairro=${bairro}`, {headers : _headers_get}).
         catch(ErrorHandler.handleError);
     }
 }
