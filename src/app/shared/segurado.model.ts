@@ -3,7 +3,7 @@ import { Endereco } from "../shared/endereco.model";
 
 export class Segurado{
 
-    public nome: string
+     public nome: string
      public email: string;
      public cpf: string;
      public dataNascimento: string;
@@ -11,7 +11,9 @@ export class Segurado{
      public telefone: string;
      public senha: string;
      public planoId: string;
+     public numeroApolice : string;
      public endereco : Endereco;
+     
 
     constructor(){}
   }

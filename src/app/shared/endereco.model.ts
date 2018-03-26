@@ -8,4 +8,5 @@ export class Endereco{
         bairro: string;
         cidade: string;
         uf: string;
+        complemento : string;
 }
