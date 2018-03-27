@@ -15,3 +15,6 @@ export const REFERENCIADO_GET_SERVICE = `${SERVER_URL}/referenciado/plano`;
 export const SEGURADO_POST_SERVICE = `${SERVER_URL}/segurado`;
 
 export const SEGURADO_GET_SERVICE = `${SERVER_URL}/segurado`;
+
+export const SEGURADO_PUT_SERVICE = `${SERVER_URL}/segurado`;
+

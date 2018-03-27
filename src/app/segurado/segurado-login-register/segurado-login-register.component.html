@@ -48,8 +48,8 @@
                                           <label class="control-label">Sexo</label>
                                           <select class="form-control" autocomplete="off" required [(ngModel)]="sexo" name="sexo">
                                               <option></option>
-                                              <option>Masculino</option>
-                                              <option>Feminino</option>
+                                              <option value="M" >Masculino</option>
+                                              <option value="F">Feminino</option>
                                           </select>
                                       </div>
                                 </div>
@@ -70,7 +70,7 @@
                                 <div class="col-md-2">
                                       <div class="form-group form-black label-floating is-empty">
                                           <label class="control-label">Número</label>
-                                          <input type="number" autocomplete="off" required mask="00000000" name="numero" [(ngModel)]="numero" class="form-control" >
+                                          <input type="number" autocomplete="off" required name="numero" [(ngModel)]="numero" class="form-control" >
                                       </div>
                                   </div>
                             </div>

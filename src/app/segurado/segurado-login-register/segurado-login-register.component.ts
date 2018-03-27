@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SeguradoService } from '../segurado.service';
-import {Segurado} from '../segurado.model'
 import { Endereco } from '../../shared/endereco.model';
 import { SeguradoPlano } from '../../shared/segurado-plano.model';
 import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Segurado } from '../../shared/segurado.model';
 
 
 @Component({
@@ -38,9 +38,6 @@ export class SeguradoLoginRegisterComponent implements OnInit {
 
   private mensagemErro : string;
 
-  public USER_DATA:any=[];
-
-
   constructor(private seguradoService : SeguradoService , 
     @Inject(LOCAL_STORAGE) private storage: WebStorageService,
     private router: Router, private route: ActivatedRoute) { }
@@ -58,7 +55,6 @@ export class SeguradoLoginRegisterComponent implements OnInit {
               this.mensagemErro = 'Não foram localizados Planos ou o serviço esta fora do ar.';
             }
           )       
-          console.log('oi');
   }
 
   buscaCep(){
@@ -98,6 +94,7 @@ export class SeguradoLoginRegisterComponent implements OnInit {
     this.endereco.logradouro = this.logradouro;
     this.endereco.numero = this.numero;
     this.endereco.uf = this.uf;
+    this.endereco.complemento = this.complemento;
 
     this.segurado.endereco = this.endereco;
 
@@ -107,15 +104,9 @@ export class SeguradoLoginRegisterComponent implements OnInit {
 
     this.seguradoService.saveSegurado(this.segurado)
     .subscribe(segurado => {
-              console.log('[Segurado Saude] Segurado cadastrado CPF : ' + segurado.cpf + ' .')
-              this.storage.set('cpf', '00000');
-
-              console.log('Set' + this.storage.get('cpf') );
-             this.USER_DATA['cpf']= this.storage.get('cpf');
-
-
-              this.USER_DATA['cpf']= this.storage.get('cpf');
-              console.log('Recuperando login' + this.USER_DATA['cpf']);
+              console.log('[Segurado Saude] - Segurado cadastrado CPF : ' + segurado.cpf + ' .')
+              
+              this.storage.set('cpf', segurado.cpf);
 
               this.router.navigate(['segurado-view']);
            } 
@@ -127,10 +118,6 @@ export class SeguradoLoginRegisterComponent implements OnInit {
 
     console.log('Setando o cpf');
     this.storage.set('cpf', '07994392741');
-
-    //this.storage.set('planoId', '1');
-    this.storage.get('planoId');
-
 
   }
   
