@@ -16,8 +16,8 @@
                                 <div class="col-md-3">      
                                     <div class="form-group form-black label-floating is-empty">
                                         <label class="control-label">Especialidade</label>                       
-                                        <select class="form-control form-control-sm"  (change)="pesquisar()" [(ngModel)]="especialidadeId">
-                                            <option value=""></option>
+                                        <select class="form-control form-control-sm" (change)="pesquisar()" [(ngModel)]="especialidadeId">
+                                            <option value="0"></option>
                                             <option *ngFor=" let esp of listaEspecialidade" value="{{esp.id}}">{{esp.nome}}</option> 
                                         </select>
                                     </div>
