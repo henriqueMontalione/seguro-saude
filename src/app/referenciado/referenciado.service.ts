@@ -3,7 +3,7 @@ import { LOCALIZACAO_SERVICE_SWAGGER, LOCALIZACAO_GET_SERVICE, REFERENCIADO_GET_
 import { ReferenciadoLocalizacao } from './../shared/referenciadoLocalizacao.model';
 import { Injectable } from '@angular/core';
 import { ReferenciadoEspecialidade } from '../shared/referenciadoEspecialidade.model';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { ErrorHandler } from '../app.error-handle';
 import 'rxjs/add/operator/catch';
@@ -20,17 +20,29 @@ export class ReferenciadoService {
         catch(ErrorHandler.handleError);
     }
 
-    getLocalizacao(): Observable<ReferenciadoLocalizacao[]> {
-        console.log('[Seguro Saude] - Acessando a URL => ' + `${LOCALIZACAO_GET_SERVICE}/1/cidade/rio de janeiro/bairro .`);
+    getLocalizacao(planoId: string, cidade: string, especialidadeId: string): Observable<ReferenciadoLocalizacao[]> {
+        console.log('[Seguro Saude] - Acessando a URL Localizacao => ' + `${LOCALIZACAO_GET_SERVICE}${planoId}/cidade/${cidade}/bairro?especialidadeId=${especialidadeId} .`);
         return this.httpClient
-        .get<ReferenciadoLocalizacao[]>(`${LOCALIZACAO_GET_SERVICE}/1/cidade/rio de janeiro/bairro`, {headers : _headers_get}).
+        .get<ReferenciadoLocalizacao[]>(`${LOCALIZACAO_GET_SERVICE}${planoId}/cidade/${cidade}/bairro?especialidadeId=${especialidadeId}`, {headers : _headers_get}).
         catch(ErrorHandler.handleError);
     }
 
-    getReferenciado(especialidadeId: string): Observable<Referenciado[]> {
-        console.log('[Seguro Saude] - Acessando a URL => ' + `${REFERENCIADO_GET_SERVICE}${especialidadeId} .` );
-        return this.httpClient
-        .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}${especialidadeId}`, {headers : _headers_get}).
-        catch(ErrorHandler.handleError);
+    getReferenciado(especialidadeId: string, bairro: string, planoId: string, cidade: string): Observable<Referenciado[]> {
+        console.log('[Seguro Saude] - Acessando a URL => ' + `${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?especialidadeId=${especialidadeId}&bairro=${bairro} .` );
+        
+        if (especialidadeId === '') {         
+            return this.httpClient
+            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?bairro=${bairro}&pageStart=0&pageSize=10`, {headers : _headers_get}).
+            catch(ErrorHandler.handleError);
+        }
+        if (bairro === '') {
+            return this.httpClient
+            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?especialidadeId=${especialidadeId}&bairro=${bairro}`, {headers : _headers_get}).
+            catch(ErrorHandler.handleError);      
+        } else {
+            return this.httpClient
+            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?especialidadeId=${especialidadeId}&bairro=${bairro}&pageStart=0&pageSize=10`, {headers : _headers_get}).
+            catch(ErrorHandler.handleError);
+        } 
     }
 }
