@@ -1,5 +1,5 @@
 
-const  SERVER_URL= 'http://192.168.0.161:80';
+const  SERVER_URL= 'http://192.168.0.161';
 
 export const ENDERECO_GET_SERVICE =  `${SERVER_URL}/localizacao/correios/endereco?cep=`;
 export const PLANO_GET_SERVICE =  `${SERVER_URL}/plano`;
@@ -12,8 +12,5 @@ export const LOCALIZACAO_SERVICE_SWAGGER = 'https://virtserver.swaggerhub.com/ve
 
 export const REFERENCIADO_GET_SERVICE = `${SERVER_URL}/referenciado/plano/5/cidade/rio de janeiro/?especialidadeId=`;
 
-export const SEGURADO_POST_SERVICE = `${SERVER_URL}/segurado`;
-
-export const SEGURADO_GET_SERVICE = `${SERVER_URL}/segurado`;
-
-export const SEGURADO_PUT_SERVICE = `${SERVER_URL}/segurado`;
+/* Segurado */
+export const SEGURADO_SERVICE = `${SERVER_URL}/segurado`;

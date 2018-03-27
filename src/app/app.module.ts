@@ -24,6 +24,7 @@ import { StorageServiceModule} from 'angular-webstorage-service';
 
 import {NgxMaskModule} from 'ngx-mask';
 import { SeguradoViewComponent } from './segurado/segurado-view/segurado-view.component'
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 
 @NgModule({
@@ -35,7 +36,6 @@ import { SeguradoViewComponent } from './segurado/segurado-view/segurado-view.co
     RedeListaComponent,
     SeguradoLoginRegisterComponent,
     SeguradoViewComponent
-    
   ],
   imports: [
     BrowserModule,

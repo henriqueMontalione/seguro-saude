@@ -1,5 +1,5 @@
 <div class="logo">
-    <a href="#" class="simple-text">
+    <a [routerLink]="['']" class="simple-text">
         <div class="logo-img">
             <img src="/assets/img/angular2-logo-red.png"/>
         </div>
@@ -18,7 +18,7 @@
             </li>
             <li>
                <a>
-                <p>
+                <p [hidden]='!novoPlano'>
                     Seja bem vindo a Seguradora de Saúde. Compre seu plano informando seus
                     dados no formulário de registro ou se já for Cliente faça o login com seu CPF e Senha.
                 </p>

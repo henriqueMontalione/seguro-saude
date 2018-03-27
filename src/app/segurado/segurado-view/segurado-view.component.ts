@@ -2,8 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SeguradoService } from '../segurado.service';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
+  providers : [NavbarComponent],
   selector: 'app-segurado-view',
   templateUrl: './segurado-view.component.html'
 })
@@ -16,7 +18,10 @@ export class SeguradoViewComponent implements OnInit {
 
   constructor(private seguradoService : SeguradoService , 
     @Inject(LOCAL_STORAGE) private storage: WebStorageService,
-    private router: Router, private route: ActivatedRoute) { }
+    private router: Router, private route: ActivatedRoute ,
+    public  navBar :  NavbarComponent) { 
+
+    }
   ngOnInit() {
 
     console.log('[Seguro Saude] - Carregando segurado de CPF:' + this.storage.get('cpf') + '.')
@@ -28,21 +33,25 @@ export class SeguradoViewComponent implements OnInit {
            this.nome = segurado.nome;
            this.cpf = segurado.cpf;
            this.numeroApolice = segurado.numeroApolice;
+           this.plano = segurado.plano.nome;
 
-           this.seguradoService.getPlano(segurado.planoId).
-           subscribe(plano => this.plano = plano.nome);
+           console.log('id seg' + segurado.plano);
+           
+           this.storage.set('planoId', segurado.plano.id);
+           this.storage.set('cidade' , segurado.endereco.cidade); 
         }
       );
-
-     
 
      } else {
       this.router.navigate(['']);
 
      }
-   
   
+  }
 
+  sair(){
+    this.storage.remove('cpf');
+    this.router.navigate(['']);
   }
 
 }

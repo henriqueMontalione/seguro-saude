@@ -34,7 +34,10 @@ export class SeguradoLoginRegisterComponent implements OnInit {
 
   private segurado : Segurado;
   private endereco : Endereco;
+  private seguradoPlano : SeguradoPlano;
   private seguradoPlanos: Array<SeguradoPlano>;
+
+  private loginCPF : string;
 
   private mensagemErro : string;
 
@@ -45,6 +48,8 @@ export class SeguradoLoginRegisterComponent implements OnInit {
   ngOnInit() {
 
     console.log('[Seguro Saude] - Executando o metodo de carga de plano.');
+
+    this.storage.remove('cpf');
 
      //Carregando os planos 
      this.seguradoService.getPlanos().
@@ -57,7 +62,8 @@ export class SeguradoLoginRegisterComponent implements OnInit {
           )       
   }
 
-  buscaCep(){
+  buscarCepParaCadastro(){
+
     console.log('[Seguro Saude] - Executando o metodo de localizacao de endereco pelo cep => ' + this.cep + ' .');
     
     this.seguradoService.getEnderecoByCep(this.cep).
@@ -83,10 +89,15 @@ export class SeguradoLoginRegisterComponent implements OnInit {
     this.segurado.cpf = this.cpf;
     this.segurado.dataNascimento = this.dataNascimento;
     this.segurado.email = this.email;
-    this.segurado.planoId = this.planoId;
+
+    this.seguradoPlano = new SeguradoPlano();
+    this.seguradoPlano.id = this.planoId;
+    this.segurado.plano = this.seguradoPlano;
+
     this.segurado.senha = this.senha;
     this.segurado.telefone = this.telefone;
 
+    this.segurado.sexo = this.sexo;
     this.endereco = new Endereco();
     this.endereco.cep = this.cep;
     this.endereco.bairro = this.bairro;
@@ -98,28 +109,36 @@ export class SeguradoLoginRegisterComponent implements OnInit {
 
     this.segurado.endereco = this.endereco;
 
-    //var bodySeguradoJson = JSON.stringify(this.segurado);
-    //console.log(bodySeguradoJson);
-    
+    var bodySeguradoJson = JSON.stringify(this.segurado);
+    console.log(bodySeguradoJson);
 
     this.seguradoService.saveSegurado(this.segurado)
     .subscribe(segurado => {
               console.log('[Segurado Saude] - Segurado cadastrado CPF : ' + segurado.cpf + ' .')
-              
               this.storage.set('cpf', segurado.cpf);
-
               this.router.navigate(['segurado-view']);
-           } 
+           } , 
+           error => {
+             this.mensagemErro = 'Não foi possível efetuar a compra do seu Plano, por favor tente mais tarde.';
+           }
       );
   }
 
+  logarSegurado(){
 
-  temp(){
+      console.log('[Segurado Saude] - Localizando Segurado com CPF : ' + this.loginCPF + ' .')
 
-    console.log('Setando o cpf');
-    this.storage.set('cpf', '07994392741');
-
+      this.seguradoService.getSegurado(this.loginCPF)
+      .subscribe(segurado => {
+          this.storage.set('cpf', segurado.cpf);
+         // this.router.navigate(['segurado-view', {outlets: {'nav-bar-child': ['navbar']}}]);
+         this.router.navigate(['segurado-view']);
+        }, 
+          error => {
+          this.mensagemErro = 'Segurado não localizado, compre seu Plano agora !';
+        }
+      );
   }
-  
+
 
 }

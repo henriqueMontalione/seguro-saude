@@ -1,4 +1,5 @@
 import { Endereco } from "../shared/endereco.model";
+import { SeguradoPlano } from "./segurado-plano.model";
 
 
 export class Segurado{
@@ -10,10 +11,9 @@ export class Segurado{
      public sexo: string;
      public telefone: string;
      public senha: string;
-     public planoId: string;
      public numeroApolice : string;
      public endereco : Endereco;
+     public plano : SeguradoPlano; 
      
-
     constructor(){}
   }

@@ -31,11 +31,14 @@ export class SeguradoProfileComponent implements OnInit {
   private telefone : string;
   private numeroApolice : string;
 
+  private seguradoPlano : SeguradoPlano;
+
   private segurado : Segurado;
   private endereco : Endereco;
   private seguradoPlanos: Array<SeguradoPlano>;
 
   private mensagemErro : string;
+  private mensagemSucesso : string;
 
   constructor(private seguradoService : SeguradoService , 
     @Inject(LOCAL_STORAGE) private storage: WebStorageService,
@@ -63,10 +66,6 @@ export class SeguradoProfileComponent implements OnInit {
            this.uf = segurado.endereco.uf;
            this.complemento = segurado.endereco.complemento;
            this.telefone = segurado.telefone;
-
-           
-
-
         }
       );
 
@@ -91,14 +90,19 @@ export class SeguradoProfileComponent implements OnInit {
           )       
   }
 
-  atualizaSegurado(){
+  atualizarSegurado(){
 
     console.log('[Seguro Saude] -  Atualizando usuario de nome : ' + this.nome + ' .');
 
     this.segurado = new Segurado();
     this.segurado.dataNascimento = this.dataNascimento;
     this.segurado.email = this.email;
-    this.segurado.planoId = this.planoId;
+    this.segurado.cpf = this.cpf;
+
+    this.seguradoPlano = new SeguradoPlano();
+    this.seguradoPlano.id = this.planoId;
+    this.segurado.plano = this.seguradoPlano;
+
     this.segurado.senha = this.senha;
     this.segurado.telefone = this.telefone;
 
@@ -109,29 +113,28 @@ export class SeguradoProfileComponent implements OnInit {
     this.endereco.logradouro = this.logradouro;
     this.endereco.numero = this.numero;
     this.endereco.uf = this.uf;
+    this.endereco.complemento = this.complemento;
 
     this.segurado.endereco = this.endereco;
 
-    //var bodySeguradoJson = JSON.stringify(this.segurado);
-    //console.log(bodySeguradoJson);
-    
+    var bodySeguradoJson = JSON.stringify(this.segurado);
+    console.log(bodySeguradoJson);
 
     this.seguradoService.updateSegurado(this.segurado)
     .subscribe(retorno => {
               console.log('[Segurado Saude] -  Atualizacao : ' + retorno + ' .')
-              
-              //this.storage.set('cpf', segurado.cpf);
-
-            //  this.router.navigate(['segurado-view']);
-           } 
+              this.mensagemSucesso = 'O Segurado foi atualizado com sucesso.'
+           }  , 
+           error => {
+             this.mensagemErro = 'Não foi possível atualizar este Segurado.';
+           }
       );
   }
-  
 
-  temp(){
-    console.log('CPF> ' + this.storage.get('cpf'));
- 
-
+  sair(){
+    this.storage.remove('cpf');
+    this.router.navigate(['']);
   }
+
 
 }

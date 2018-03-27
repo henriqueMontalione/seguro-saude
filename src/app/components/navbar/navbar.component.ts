@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit, ElementRef, Injectable } from '@angular/core';
 import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 
@@ -6,6 +6,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
   selector: 'app-navbar',
   templateUrl: './navbar.component.html'
 })
+
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
     location: Location;

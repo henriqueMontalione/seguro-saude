@@ -1,5 +1,7 @@
-export interface SeguradoPlano{
-    id: number,
-    nome: string,
-    tipo: string
+export class SeguradoPlano{
+    id: string;
+    nome: string;
+    tipo: string;
+
+    constructor(){}
   }

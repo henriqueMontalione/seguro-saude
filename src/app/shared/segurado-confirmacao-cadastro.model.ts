@@ -4,5 +4,4 @@ export interface SeguradoConfirmacaoCadastro{
     numeroApolice: string,
     dataInicioVigencia: string,
     dataFimVigencia: string
-
 }

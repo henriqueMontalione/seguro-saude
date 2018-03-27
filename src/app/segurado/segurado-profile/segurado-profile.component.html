@@ -8,28 +8,31 @@
                         <p class="category">Apólice : {{numeroApolice}}</p>
                     </div>
                     <div class="card-content">
-  
-                      
                             <div class="alert alert-danger" [hidden]="!mensagemErro">
                                  <span>{{mensagemErro}}</span>
                              </div>
+
+                             <div class="alert alert-success" [hidden]="!mensagemSucesso">
+                                    <span>{{mensagemSucesso}}</span>                           
+                             </div>
        
-                             <form  novalidate #form="ngForm" (ngSubmit)="criarSegurado()">
+                             <form  novalidate #form="ngForm" (ngSubmit)="atualizarSegurado()">
                                  <div class="row">
                                      <div class="col-md-4">
-                                         <div class="form-group form-black label-floating is-empty">
-                                             <label class="control-label">CPF e Data de Nascimento</label>
-                                             <input type="text" autocomplete="off" required mask="000.000.000-00" [(ngModel)]="cpf" name="cpf" class="form-control">
+                                         <div class="form-group form-black">
+                                             <label class="control-label">CPF</label>
+                                             <input type="text" disabled autocomplete="off" required mask="000.000.000-00" [(ngModel)]="cpf" name="cpf" class="form-control">
                                          </div>
                                      </div>
      
                                      <div class="col-md-3">
-                                         <div class="form-group form-black label-floating is-empty">
-                                             <input type="text" type="date" autocomplete="off" required [(ngModel)]="dataNascimento" name="dataNascimento" class="form-control" >
+                                         <div class="form-group form-black ">
+                                             <label class="control-label">Data de Nascimento</label>
+                                             <input type="text" disabled type="date" autocomplete="off" required [(ngModel)]="dataNascimento" name="dataNascimento" class="form-control" >
                                          </div>
                                      </div>
                                      <div class="col-md-5">
-                                         <div class="form-group form-black label-floating is-empty">
+                                         <div class="form-group form-black ">
                                              <label class="control-label">Email</label>
                                              <input type="email" autocomplete="off" required [(ngModel)]="email" name="email" class="form-control" >
                                          </div>
@@ -38,13 +41,13 @@
          
                                  <div class="row">
                                      <div class="col-md-9">
-                                         <div class="form-group form-black label-floating is-empty">
+                                         <div class="form-group form-black ">
                                              <label class="control-label">Nome</label>
-                                             <input type="text" maxlength="50" autocomplete="off" required [(ngModel)]="nome" name="nome" class="form-control" >
+                                             <input type="text" disabled maxlength="50" autocomplete="off" required [(ngModel)]="nome" name="nome" class="form-control" >
                                          </div>
                                    </div>
                                    <div class="col-md-3">
-                                           <div class="form-group form-black label-floating is-empty" >
+                                           <div class="form-group form-black " >
                                                <label class="control-label">Sexo</label>
                                                <select class="form-control" autocomplete="off" required [(ngModel)]="sexo" name="sexo">
                                                    <option></option>
@@ -57,18 +60,19 @@
          
                                  <div class="row">
                                    <div class="col-md-4">
-                                       <div class="form-group form-black label-floating is-empty">
+                                       <div class="form-group form-black ">
                                            <label class="control-label">CEP</label>
                                            <input type="text" autocomplete="off" required mask="00000-000" name="cep" [(ngModel)]="cep" class="form-control" (blur)="buscaCep()"/>
                                        </div>
                                      </div>
                                      <div class="col-md-6">
-                                         <div class="form-group form-black label-floating is-empty">
+                                         <div class="form-group form-black ">
+                                            <label class="control-label">Logradouro</label>
                                              <input type="text" autocomplete="off" required name="logradouro" [(ngModel)]="logradouro" class="form-control" disabled>
                                          </div>
                                      </div>
                                      <div class="col-md-2">
-                                           <div class="form-group form-black label-floating is-empty">
+                                           <div class="form-group form-black ">
                                                <label class="control-label">Número</label>
                                                <input type="number" autocomplete="off" required name="numero" [(ngModel)]="numero" class="form-control" >
                                            </div>
@@ -78,24 +82,24 @@
                       
                                  <div class="row">
                                      <div class="col-md-4">
-                                         <div class="form-group form-black label-floating is-empty">
+                                         <div class="form-group form-black ">
                                              <input type="text" maxlength="50" autocomplete="off" required name="bairro"  [(ngModel)]="bairro" class="form-control" disabled>
                                          </div>
                                      </div>
                                      <div class="col-md-4">
-                                         <div class="form-group form-black label-floating is-empty">
+                                         <div class="form-group form-black ">
                                              <input type="text" maxlength="50" autocomplete="off" required name="cidade" [(ngModel)]="cidade" class="form-control" disabled>
                                          </div>
                                      </div>
                                      <div class="col-md-4">
-                                         <div class="form-group form-black label-floating is-empty">
+                                         <div class="form-group form-black ">
                                              <input type="text"  maxlength="2" autocomplete="off" required name="uf" [(ngModel)]="uf" class="form-control" disabled>
                                          </div>
                                      </div>
                                  </div>
                                  <div class="row">
                                        <div class="col-md-8">
-                                           <div class="form-group form-black label-floating is-empty">
+                                           <div class="form-group form-black ">
                                                <label class="control-label">Complemento</label>
                                                <input type="text" required maxlength="50" autocomplete="off" name="complemento" [(ngModel)]="complemento" class="form-control">
                                            </div>
@@ -104,9 +108,9 @@
                                      
      
                                        <div class="col-md-4">
-                                         <div class="form-group form-black label-floating is-empty">
+                                         <div class="form-group form-black ">
                                              <label class="control-label">Telefone</label>
-                                             <input type="text"  mask="(00)0000-0000" autocomplete="off" required [(ngModel)]="telefone" name="telefone" class="form-control" >
+                                             <input type="text"  mask="(00)00000-0000" autocomplete="off" required [(ngModel)]="telefone" name="telefone" class="form-control" >
                                          </div>
                                      </div>
                                      
@@ -131,7 +135,7 @@
                             <h6 class="category text-gray">CPF: {{cpf}}</h6>
                             <h4 class="card-title">Segurado: {{nome}}</h4>
                             <h4 class="card-title">Plano: {{plano}}</h4>
-                            <a href="#" class="btn btn-danger btn-round">Sair</a>
+                            <a  (click)='sair()' class="btn btn-danger btn-round">Sair</a>
                     </div>
                 </div>
             </div>

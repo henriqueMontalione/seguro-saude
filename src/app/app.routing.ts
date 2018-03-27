@@ -6,11 +6,16 @@ import { SeguradoProfileComponent } from './segurado/segurado-profile/segurado-p
 import { RedeListaComponent } from './referenciado/rede-lista/rede-lista.component';
 import { SeguradoLoginRegisterComponent } from './segurado/segurado-login-register/segurado-login-register.component';
 import { SeguradoViewComponent } from './segurado/segurado-view/segurado-view.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+
 
 export const ROUTES: Routes  =[
                       { path: '', component: SeguradoLoginRegisterComponent},
                       { path : 'segurado-profile', component : SeguradoProfileComponent},
-                      { path : 'segurado-view', component : SeguradoViewComponent},
+                      { path : 'segurado-view', component : SeguradoViewComponent , children :
+                    [
+                      {path: 'navbar' , component : NavbarComponent}
+                    ]},
                       { path : 'rede-lista', component : RedeListaComponent}
                     ]
 
