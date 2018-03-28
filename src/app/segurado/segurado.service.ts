@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable , EventEmitter} from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from "rxjs/Observable";
 import 'rxjs/add/operator/catch'
@@ -30,6 +30,8 @@ export class SeguradoService{
         return this.httpClient.get<Segurado[]>(`${SEGURADO_SERVICE}/${cpf}`, {headers : _headers_get}).
         catch(ErrorHandler.handleError)
     }
+
+
     
     getPlanos() : Observable<SeguradoPlano[]> { 
         console.log('[Segurado Saude] - Acessando a URL => ' + `${PLANO_GET_SERVICE}`);
@@ -45,6 +47,7 @@ export class SeguradoService{
     }
 
     updateSegurado(segurado: Segurado) : Observable<any> {
+
         const cpf : string = segurado.cpf;
         return this.httpClient.put<any>(`${SEGURADO_SERVICE}/${cpf}` , segurado , {headers :_headers_post_put});
     }

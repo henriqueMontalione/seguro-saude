@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
+/* Cabecalhos HTTP */
 export const _headers_get = new HttpHeaders();
-
 export const _headers_post_put = new HttpHeaders()
 .set('Accept', 'application/json')
 .set('Content-Type', 'application/json');

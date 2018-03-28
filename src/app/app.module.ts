@@ -25,6 +25,7 @@ import { StorageServiceModule} from 'angular-webstorage-service';
 import {NgxMaskModule} from 'ngx-mask';
 import { SeguradoViewComponent } from './segurado/segurado-view/segurado-view.component'
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { SeguradoEventService } from './segurado/segurado-event.service';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     ReferenciadoComponent,
     RedeListaComponent,
     SeguradoLoginRegisterComponent,
-    SeguradoViewComponent
+    SeguradoViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +47,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NgxMaskModule.forRoot(),
     StorageServiceModule
   ],
-  providers: [SeguradoService, ReferenciadoService],
+  providers: [SeguradoService, ReferenciadoService , SeguradoEventService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,16 +9,18 @@
 <div class="sidebar-wrapper">
 
     <div class="nav-container">
-        <ul class="nav">
+        <ul class="nav" *ngIf="mostrarMenu">
             <li  routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}}">
                 <a  [routerLink]="[menuItem.path]">
                     <i class="material-icons">{{menuItem.icon}}</i>
                     <p>{{menuItem.title}}</p>
                 </a>
             </li>
+        </ul>
+        <ul class="nav" *ngIf="!mostrarMenu">    
             <li>
                <a>
-                <p [hidden]='!novoPlano'>
+                <p>
                     Seja bem vindo a Seguradora de Saúde. Compre seu plano informando seus
                     dados no formulário de registro ou se já for Cliente faça o login com seu CPF e Senha.
                 </p>
