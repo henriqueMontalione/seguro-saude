@@ -34,7 +34,6 @@
                             </div>
                         </div>
                   
-
                     <div class="card-content table-responsive">
                         <table class="table">
                             <thead class="text-danger">
@@ -42,13 +41,17 @@
                                     <th>Nome</th>
                                     <th>Especialidade</th>
                                     <th>Local</th>
+                                    <th>Telefone</th>
+                                    <th>Horário</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let ref of listaReferenciado">
                                     <td>{{ref.nome}}</td>
                                     <td>{{ref.especialidade.nome}}</td>
-                                    <td>{{ref.endereco.bairro}}</td>                                
+                                    <td>{{ref.endereco.logradouro}}, {{ref.endereco.complemento}}, {{ref.endereco.bairro}}, {{ref.endereco.cep}}</td> 
+                                    <td>{{ref.telefone}}</td>
+                                    <td>{{ref.horaInicioAtendimento}} às {{ref.horaFimAtendimento}}</td>                                 
                                 </tr>
                             </tbody>
                         </table>
@@ -58,3 +61,4 @@
         </div>
     </div>
 </div>
+
