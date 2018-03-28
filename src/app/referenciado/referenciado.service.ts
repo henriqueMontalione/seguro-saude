@@ -9,8 +9,13 @@ import { ErrorHandler } from '../app.error-handle';
 import 'rxjs/add/operator/catch';
 import { _headers_get } from '../app.api-util';
 
+
+export const SIZE_PAGE_REFERENCIADO : number = 2;
+
 @Injectable()
 export class ReferenciadoService {
+
+    private initPage : number = 0;
 
     constructor(private httpClient: HttpClient) {}
 
@@ -27,21 +32,28 @@ export class ReferenciadoService {
         catch(ErrorHandler.handleError);
     }
 
-    getReferenciado(especialidadeId: string, bairro: string, planoId: string, cidade: string): Observable<Referenciado[]> {
+    getReferenciado(especialidadeId: string, bairro: string, planoId: string, cidade: string, initPage:number): Observable<Referenciado[]> {
+        
         console.log('[Seguro Saude] - Acessando a URL => ' + `${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?especialidadeId=${especialidadeId}&bairro=${bairro} .` );
         
-        if (especialidadeId === '') {         
+        if (bairro != '' && (especialidadeId == '' || especialidadeId == '0') ) {      
+            console.log('1');   
             return this.httpClient
-            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?bairro=${bairro}&pageStart=0&pageSize=10`, {headers : _headers_get}).
+            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?bairro=${bairro}&pageStart=${initPage}&pageSize=${SIZE_PAGE_REFERENCIADO}`, {headers : _headers_get}).
             catch(ErrorHandler.handleError);
-        }
-        if (bairro === '') {
+
+        } else if (especialidadeId != '' && especialidadeId != '0' && bairro == '') {
+            console.log('2');   
+
             return this.httpClient
-            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?especialidadeId=${especialidadeId}&bairro=${bairro}`, {headers : _headers_get}).
+            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?especialidadeId=${especialidadeId}&pageStart=${initPage}&pageSize=${SIZE_PAGE_REFERENCIADO}`, {headers : _headers_get}).
             catch(ErrorHandler.handleError);      
-        } else {
+
+        } else if (bairro !='' && (especialidadeId != '' && especialidadeId != '0')){
+            console.log('3');   
+
             return this.httpClient
-            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?especialidadeId=${especialidadeId}&bairro=${bairro}&pageStart=0&pageSize=10`, {headers : _headers_get}).
+            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?especialidadeId=${especialidadeId}&bairro=${bairro}&pageStart${initPage}&pageSize=${SIZE_PAGE_REFERENCIADO}`, {headers : _headers_get}).
             catch(ErrorHandler.handleError);
         } 
     }

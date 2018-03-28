@@ -109,6 +109,7 @@ export class SeguradoProfileComponent implements OnInit {
 
     this.segurado.senha = this.senha;
     this.segurado.telefone = this.telefone;
+    this.segurado.sexo = this.sexo;
 
     this.endereco = new Endereco();
     this.endereco.cep = this.cep;

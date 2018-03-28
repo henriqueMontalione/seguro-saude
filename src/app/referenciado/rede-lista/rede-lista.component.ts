@@ -1,9 +1,11 @@
 import { ReferenciadoLocalizacao } from './../../shared/referenciadoLocalizacao.model';
 import { ReferenciadoEspecialidade } from '../../shared/referenciadoEspecialidade.model';
-import { ReferenciadoService } from './../referenciado.service';
+import { ReferenciadoService, SIZE_PAGE_REFERENCIADO } from './../referenciado.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { Referenciado } from '../../shared/referenciado.model';
 import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { SeguradoEventService } from '../../segurado/segurado-event.service';
 
 @Component({
   selector: 'app-rede-lista',
@@ -27,10 +29,22 @@ export class RedeListaComponent implements OnInit {
   private cidade = '';
   private mensagemErro: string;
 
-  constructor(private referenciadoService: ReferenciadoService, @Inject(LOCAL_STORAGE) private storage: WebStorageService) {}
+  private initPage : number = 0;
+
+  constructor(private referenciadoService: ReferenciadoService, 
+    @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+    private router: Router, private route: ActivatedRoute,
+    private seguradoEventService : SeguradoEventService) {}
 
   ngOnInit() {
-    this.setStorage();
+
+    if (!(this.storage.get('cpf') != undefined &&
+    this.storage.get('cpf') != '')){
+      this.seguradoEventService.seguradoLogado.emit(false);
+      this.router.navigate(['']);
+     } 
+
+     this.setStorage();
 
     this.referenciadoService.getEspecialidade().
       subscribe(referenciadoEspecialidade => {
@@ -54,37 +68,57 @@ export class RedeListaComponent implements OnInit {
       });
   }
 
-  pesquisar() {
-    this.referenciadoService.getLocalizacao(this.planoID, this.cidade, this.especialidadeId).
-      subscribe(referenciadoLocalizacao => {
-        this.listaLocalizacao = referenciadoLocalizacao;
-        console.log(this.listaLocalizacao);
-        console.log('bairro: ' + this.listaLocalizacao[0].bairro);
-      },
-      error => {
-        this.mensagemErro = 'O serviço de Localização está fora do ar.';
-      });
+  pesquisar(newPagination : boolean) {
 
+    if (newPagination){
+      this.initPage = 0;
+      this.listaReferenciado = new Array<Referenciado>();
+    }
 
+    console.log('Bairro ' + this.bairro);
+    console.log('Especialidade ' + this.especialidadeId);
 
+    if ( (this.especialidadeId == '' || this.especialidadeId == '0') 
+        && this.bairro == ''){
+          return;
+    }
 
-    this.referenciadoService.getReferenciado(this.especialidadeId, this.bairro, this.planoID, this.cidade).
+    this.referenciadoService.getReferenciado(this.especialidadeId, 
+      this.bairro, this.planoID, this.cidade, this.initPage).
     subscribe(referenciado => {
-      this.listaReferenciado = referenciado;
+      this.listaReferenciado.push(...referenciado);
       console.log(this.listaReferenciado);
       console.log('Referenciado: ' + this.listaReferenciado[0]);
+      this.initPage += SIZE_PAGE_REFERENCIADO;
     },
     error => {
       this.mensagemErro = 'O serviço de Referenciado está fora do ar.';
     });
+
+    if (this.especialidadeId == '' || this.especialidadeId == '0'){
+      this.bairro = '';
+    }
+
+  }
+
+  loadFilters(){
+    
+    this.referenciadoService.getLocalizacao(this.planoID, this.cidade, this.especialidadeId).
+    subscribe(referenciadoLocalizacao => {
+      this.listaLocalizacao = referenciadoLocalizacao;
+      console.log(this.listaLocalizacao);
+      console.log('bairro: ' + this.listaLocalizacao[0].bairro);
+    },
+    error => {
+      this.mensagemErro = 'O serviço de Localização está fora do ar.';
+    });
+
   }
 
   setStorage() {
-    this.storage.set('planoId', '5');
-    this.storage.set('cidade', 'rio de janeiro');
-
     this.cidade = this.storage.get('cidade');
     this.planoID = this.storage.get('planoId');
     console.log('planoId: ', this.storage.get('planoId'), ', cidade: ', this.storage.get('cidade'));
   }
+  
 }

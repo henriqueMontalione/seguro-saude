@@ -7,29 +7,35 @@
                         <h4 class="title">Rede Referenciada</h4>
                         <p class="category">Clínicas, Consultórios, Médicos e Laboratórios.</p>
                     </div>                    
-
+                        <button (click)="pesquisar(false)">+10</button>
                         <div class="container-fluid">
                             <div class="alert alert-danger " [hidden]="!mensagemErro">
                                 <span>{{mensagemErro}}</span>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">      
+                                <div class="col-md-5">      
                                     <div class="form-group form-black label-floating is-empty">
                                         <label class="control-label">Especialidade</label>                       
-                                        <select class="form-control form-control-sm" (change)="pesquisar()" [(ngModel)]="especialidadeId">
+                                        <select class="form-control form-control-sm" (change)="loadFilters()" [(ngModel)]="especialidadeId">
                                             <option value="0"></option>
                                             <option *ngFor=" let esp of listaEspecialidade" value="{{esp.id}}">{{esp.nome}}</option> 
                                         </select>
                                     </div>
                                 </div>
-                                <div class="col-md-3">   
+                                <div class="col-md-5">   
                                         <div class="form-group form-black label-floating is-empty"> 
                                             <label class="control-label">Localização</label>                            
-                                            <select class="form-control form-control-sm" (change)="pesquisar()" [(ngModel)]="bairro">
+                                            <select class="form-control form-control-sm" (change)="loadFilters()" [(ngModel)]="bairro">
                                                 <option value=""></option>
                                                 <option *ngFor=" let loc of listaLocalizacao" value="{{loc.bairro}}">{{loc.bairro}}</option> 
                                             </select>
+
                                         </div>
+                                    </div>
+                                    <div class="col-md-2">   
+                                            <div class="form-group form-black label-floating is-empty"> 
+                                                <button type="button" (click)="pesquisar(true)" class="btn btn-danger pull-right" >Pesquisar</button>
+                                            </div>
                                     </div>
                             </div>
                         </div>
@@ -52,6 +58,9 @@
                                     <td>{{ref.endereco.logradouro}}, {{ref.endereco.complemento}}, {{ref.endereco.bairro}}, {{ref.endereco.cep}}</td> 
                                     <td>{{ref.telefone}}</td>
                                     <td>{{ref.horaInicioAtendimento}} às {{ref.horaFimAtendimento}}</td>                                 
+                                </tr>
+                                <tr>
+                                 <button type="button" (click)="pesquisar(false)" class="btn btn-danger pull-right" >Ver mais...</button>
                                 </tr>
                             </tbody>
                         </table>

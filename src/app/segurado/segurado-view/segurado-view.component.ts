@@ -46,8 +46,8 @@ export class SeguradoViewComponent implements OnInit {
       );
 
      } else {
+      this.seguradoEventService.seguradoLogado.emit(false);
       this.router.navigate(['']);
-
      }
   
   }
