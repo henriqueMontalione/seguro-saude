@@ -8,7 +8,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 
 declare const $: any;
 
-@Component({
+@Component({ 
   selector: 'app-root',
   templateUrl: './app.component.html'
 })
@@ -18,9 +18,10 @@ export class AppComponent implements OnInit {
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
 
+
   @ViewChild(NavbarComponent) navbar: NavbarComponent;
 
-  constructor( public location: Location, private router: Router) {}
+  constructor(public location: Location, private router: Router) {}
 
   ngOnInit() {
 

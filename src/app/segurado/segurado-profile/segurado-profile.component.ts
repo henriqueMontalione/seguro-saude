@@ -5,6 +5,7 @@ import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
 import { Segurado } from '../../shared/segurado.model';
 import { SeguradoPlano } from '../../shared/segurado-plano.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SeguradoEventService } from '../segurado-event.service';
 
 @Component({
   selector: 'app-segurado-profile',
@@ -42,7 +43,8 @@ export class SeguradoProfileComponent implements OnInit {
 
   constructor(private seguradoService : SeguradoService , 
     @Inject(LOCAL_STORAGE) private storage: WebStorageService,
-    private router: Router, private route: ActivatedRoute) { }
+    private router: Router, private route: ActivatedRoute,
+    private seguradoEventService: SeguradoEventService) { }
 
   ngOnInit() {
 
@@ -76,13 +78,15 @@ export class SeguradoProfileComponent implements OnInit {
     
   }
 
-  buscaCep(cep){
+  buscaCepAtualiacao(cep){
 
-    console.log('Executando o metodo de localizacao de endereco pelo cep => ' + this.cep)
+    if (this.cep == null ) return;
+
+    console.log('Executando o metodo de localizacao de endereco pelo cep => ' + this.cep);
+
     this.seguradoService.getEnderecoByCep(this.cep).
             subscribe(endereco => {
               this.logradouro = endereco.logradouro;
-              console.log(endereco.logradouro)
               this.bairro = endereco.bairro
               this.cidade = endereco.cidade
               this.uf = endereco.uf
@@ -132,6 +136,7 @@ export class SeguradoProfileComponent implements OnInit {
   }
 
   sair(){
+    this.seguradoEventService.seguradoLogado.emit(false);
     this.storage.remove('cpf');
     this.router.navigate(['']);
   }

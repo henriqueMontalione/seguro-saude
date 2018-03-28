@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { SeguradoService } from '../segurado.service';
 import { Endereco } from '../../shared/endereco.model';
@@ -6,6 +6,7 @@ import { SeguradoPlano } from '../../shared/segurado-plano.model';
 import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Segurado } from '../../shared/segurado.model';
+import { SeguradoEventService } from '../segurado-event.service';
 
 
 @Component({
@@ -41,18 +42,20 @@ export class SeguradoLoginRegisterComponent implements OnInit {
 
   private mensagemErro : string;
 
+
   constructor(private seguradoService : SeguradoService , 
     @Inject(LOCAL_STORAGE) private storage: WebStorageService,
-    private router: Router, private route: ActivatedRoute) { }
+    private router: Router, private route: ActivatedRoute,
+    private seguradoEventService: SeguradoEventService) { }
 
   ngOnInit() {
 
     console.log('[Seguro Saude] - Executando o metodo de carga de plano.');
 
     this.storage.remove('cpf');
+    this.seguradoEventService.seguradoLogado.emit(false);
 
-     //Carregando os planos 
-     this.seguradoService.getPlanos().
+    this.seguradoService.getPlanos().
             subscribe(seguradoPlanos => {
               this.seguradoPlanos = seguradoPlanos;
             }, 
@@ -63,6 +66,8 @@ export class SeguradoLoginRegisterComponent implements OnInit {
   }
 
   buscarCepParaCadastro(){
+
+    if (this.cep == null ) return;
 
     console.log('[Seguro Saude] - Executando o metodo de localizacao de endereco pelo cep => ' + this.cep + ' .');
     
@@ -116,6 +121,7 @@ export class SeguradoLoginRegisterComponent implements OnInit {
     .subscribe(segurado => {
               console.log('[Segurado Saude] - Segurado cadastrado CPF : ' + segurado.cpf + ' .')
               this.storage.set('cpf', segurado.cpf);
+              this.seguradoEventService.seguradoLogado.emit(true);
               this.router.navigate(['segurado-view']);
            } , 
            error => {
@@ -131,11 +137,12 @@ export class SeguradoLoginRegisterComponent implements OnInit {
       this.seguradoService.getSegurado(this.loginCPF)
       .subscribe(segurado => {
           this.storage.set('cpf', segurado.cpf);
-         // this.router.navigate(['segurado-view', {outlets: {'nav-bar-child': ['navbar']}}]);
-         this.router.navigate(['segurado-view']);
+          this.seguradoEventService.seguradoLogado.emit(true);
+          this.router.navigate(['segurado-view']);
         }, 
           error => {
           this.mensagemErro = 'Segurado não localizado, compre seu Plano agora !';
+          this.seguradoEventService.seguradoLogado.emit(false);
         }
       );
   }

@@ -1,6 +1,7 @@
 import {Response} from '@angular/http'
 import { Observable } from 'rxjs/Observable';
 
+/* Classe de tratamento de falhas de integracao */
 export class ErrorHandler {
 
     static handleError(error : Response | any){

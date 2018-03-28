@@ -8,14 +8,11 @@ import { SeguradoLoginRegisterComponent } from './segurado/segurado-login-regist
 import { SeguradoViewComponent } from './segurado/segurado-view/segurado-view.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
-
+/* Rotas de navegacao */
 export const ROUTES: Routes  =[
                       { path: '', component: SeguradoLoginRegisterComponent},
                       { path : 'segurado-profile', component : SeguradoProfileComponent},
-                      { path : 'segurado-view', component : SeguradoViewComponent , children :
-                    [
-                      {path: 'navbar' , component : NavbarComponent}
-                    ]},
+                       {path: 'segurado-view' , component : SeguradoViewComponent},
                       { path : 'rede-lista', component : RedeListaComponent}
                     ]
 

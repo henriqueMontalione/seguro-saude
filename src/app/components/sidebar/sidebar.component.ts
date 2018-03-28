@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
-
+import { SeguradoLoginRegisterComponent } from '../../segurado/segurado-login-register/segurado-login-register.component';
+import { SeguradoEventService } from '../../segurado/segurado-event.service';
 
 declare const $: any;
 declare interface RouteInfo {
@@ -20,21 +21,26 @@ export const ROUTES: RouteInfo[] = [
   templateUrl: './sidebar.component.html'
 })
 export class SidebarComponent implements OnInit {
-  menuItems: any[];
-  novoPlano : boolean = false;
 
-  constructor(@Inject(LOCAL_STORAGE) private storage: WebStorageService) { }
+    menuItems: any[];
+    public mostrarMenu: boolean = false;
+
+  constructor(private seguradoEventService: SeguradoEventService,
+     @Inject(LOCAL_STORAGE) private storage: WebStorageService) { }  
 
   ngOnInit() {
 
-    if (this.storage.get('cpf') != null){
-        this.menuItems = ROUTES.filter(menuItem => menuItem);
-        this.novoPlano = false;
-    }else {
-       this.novoPlano = true;
-    }  
+    this.seguradoEventService.seguradoLogado.subscribe(
+        mostrar => {
+                this.mostrarMenu = mostrar
+                }
+        )   
 
-    console.log('Novo Plano ' + this.novoPlano + ' CPF ' + this.storage.get('cpf'));
+
+    
+        this.menuItems = ROUTES.filter(menuItem => menuItem);   
+    
+
   }
   isMobileMenu() {
       if ($(window).width() > 991) {
@@ -43,3 +49,7 @@ export class SidebarComponent implements OnInit {
       return true;
   };
 }
+function newFunction() {
+    return this;
+}
+
