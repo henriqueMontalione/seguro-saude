@@ -114,8 +114,8 @@ export class SeguradoLoginRegisterComponent implements OnInit {
 
     this.segurado.endereco = this.endereco;
 
-    var bodySeguradoJson = JSON.stringify(this.segurado);
-    console.log(bodySeguradoJson);
+   // var bodySeguradoJson = JSON.stringify(this.segurado);
+    //console.log(bodySeguradoJson);
 
     this.seguradoService.saveSegurado(this.segurado)
     .subscribe(segurado => {

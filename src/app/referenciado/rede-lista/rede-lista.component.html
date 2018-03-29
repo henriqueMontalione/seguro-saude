@@ -7,10 +7,14 @@
                         <h4 class="title">Rede Referenciada</h4>
                         <p class="category">Clínicas, Consultórios, Médicos e Laboratórios.</p>
                     </div>                    
-                        <button (click)="pesquisar(false)">+10</button>
                         <div class="container-fluid">
-                            <div class="alert alert-danger " [hidden]="!mensagemErro">
-                                <span>{{mensagemErro}}</span>
+                            <div class="row">
+                                <div class="col-md-12">    
+                                   <!-- Inserir espacamento desta mensagem de erro-->
+                                    <div class="alert alert-danger"  [hidden]="!mensagemErro">
+                                            <span>{{mensagemErro}}</span>
+                                    </div>
+                                </div>    
                             </div>
                             <div class="row">
                                 <div class="col-md-5">      
@@ -25,7 +29,7 @@
                                 <div class="col-md-5">   
                                         <div class="form-group form-black label-floating is-empty"> 
                                             <label class="control-label">Localização</label>                            
-                                            <select class="form-control form-control-sm" (change)="loadFilters()" [(ngModel)]="bairro">
+                                            <select class="form-control form-control-sm" [(ngModel)]="bairro">
                                                 <option value=""></option>
                                                 <option *ngFor=" let loc of listaLocalizacao" value="{{loc.bairro}}">{{loc.bairro}}</option> 
                                             </select>
@@ -59,12 +63,12 @@
                                     <td>{{ref.telefone}}</td>
                                     <td>{{ref.horaInicioAtendimento}} às {{ref.horaFimAtendimento}}</td>                                 
                                 </tr>
-                                <tr>
-                                 <button type="button" (click)="pesquisar(false)" class="btn btn-danger pull-right" >Ver mais...</button>
-                                </tr>
-                            </tbody>
+                            </tbody>    
                         </table>
                     </div>
+                    <!-- Criar outra estrutura para o botao mais -->    
+                    <button type="button" (click)="pesquisar(false)" class="btn btn-danger pull-right" >Ver mais Referenciados de sua rede...</button>
+                                                  
                 </div>
             </div>
         </div>

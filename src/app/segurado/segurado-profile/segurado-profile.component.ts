@@ -72,8 +72,9 @@ export class SeguradoProfileComponent implements OnInit {
       );
 
      } else {
+      this.seguradoEventService.seguradoLogado.emit(false);
+      this.storage.remove('cpf'); 
       this.router.navigate(['']);
-
      }
     
   }
@@ -122,8 +123,8 @@ export class SeguradoProfileComponent implements OnInit {
 
     this.segurado.endereco = this.endereco;
 
-    var bodySeguradoJson = JSON.stringify(this.segurado);
-    console.log(bodySeguradoJson);
+  //  var bodySeguradoJson = JSON.stringify(this.segurado);
+  //  console.log(bodySeguradoJson);
 
     this.seguradoService.updateSegurado(this.segurado)
     .subscribe(retorno => {

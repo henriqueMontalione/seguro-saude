@@ -10,7 +10,7 @@ import 'rxjs/add/operator/catch';
 import { _headers_get } from '../app.api-util';
 
 
-export const SIZE_PAGE_REFERENCIADO : number = 2;
+export const SIZE_PAGE_REFERENCIADO : number = 5;
 
 @Injectable()
 export class ReferenciadoService {
@@ -34,26 +34,21 @@ export class ReferenciadoService {
 
     getReferenciado(especialidadeId: string, bairro: string, planoId: string, cidade: string, initPage:number): Observable<Referenciado[]> {
         
-        console.log('[Seguro Saude] - Acessando a URL => ' + `${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?especialidadeId=${especialidadeId}&bairro=${bairro} .` );
+        console.log('[Seguro Saude] - Acessando a URL => ' + `${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}?especialidadeId=${especialidadeId}&bairro=${bairro} .` );
         
         if (bairro != '' && (especialidadeId == '' || especialidadeId == '0') ) {      
-            console.log('1');   
             return this.httpClient
-            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?bairro=${bairro}&pageStart=${initPage}&pageSize=${SIZE_PAGE_REFERENCIADO}`, {headers : _headers_get}).
+            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}?bairro=${bairro}&pageStart=${initPage}&pageSize=${SIZE_PAGE_REFERENCIADO}`, {headers : _headers_get}).
             catch(ErrorHandler.handleError);
 
         } else if (especialidadeId != '' && especialidadeId != '0' && bairro == '') {
-            console.log('2');   
-
             return this.httpClient
-            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?especialidadeId=${especialidadeId}&pageStart=${initPage}&pageSize=${SIZE_PAGE_REFERENCIADO}`, {headers : _headers_get}).
+            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}?especialidadeId=${especialidadeId}&pageStart=${initPage}&pageSize=${SIZE_PAGE_REFERENCIADO}`, {headers : _headers_get}).
             catch(ErrorHandler.handleError);      
 
         } else if (bairro !='' && (especialidadeId != '' && especialidadeId != '0')){
-            console.log('3');   
-
             return this.httpClient
-            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}/?especialidadeId=${especialidadeId}&bairro=${bairro}&pageStart${initPage}&pageSize=${SIZE_PAGE_REFERENCIADO}`, {headers : _headers_get}).
+            .get<Referenciado[]>(`${REFERENCIADO_GET_SERVICE}/${planoId}/cidade/${cidade}?especialidadeId=${especialidadeId}&bairro=${bairro}&pageStart${initPage}&pageSize=${SIZE_PAGE_REFERENCIADO}`, {headers : _headers_get}).
             catch(ErrorHandler.handleError);
         } 
     }

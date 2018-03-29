@@ -37,8 +37,6 @@ export class SeguradoViewComponent implements OnInit {
            this.cpf = segurado.cpf;
            this.numeroApolice = segurado.numeroApolice;
            this.plano = segurado.plano.nome;
-
-           console.log('id seg' + segurado.plano);
            
            this.storage.set('planoId', segurado.plano.id);
            this.storage.set('cidade' , segurado.endereco.cidade); 

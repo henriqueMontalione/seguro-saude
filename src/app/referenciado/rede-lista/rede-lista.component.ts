@@ -36,14 +36,21 @@ export class RedeListaComponent implements OnInit {
     private router: Router, private route: ActivatedRoute,
     private seguradoEventService : SeguradoEventService) {}
 
-  ngOnInit() {
+   verifyLoogged(){
 
-    if (!(this.storage.get('cpf') != undefined &&
-    this.storage.get('cpf') != '')){
-      this.seguradoEventService.seguradoLogado.emit(false);
-      this.router.navigate(['']);
-     } 
+      if (!(this.storage.get('cpf') != undefined &&
+      this.storage.get('cpf') != '')){
+        this.seguradoEventService.seguradoLogado.emit(false);
+        this.router.navigate(['']);
+      } else {
+        this.seguradoEventService.seguradoLogado.emit(true);
+      }
 
+   }
+  
+    ngOnInit() {
+
+     this.verifyLoogged();
      this.setStorage();
 
     this.referenciadoService.getEspecialidade().
@@ -75,9 +82,6 @@ export class RedeListaComponent implements OnInit {
       this.listaReferenciado = new Array<Referenciado>();
     }
 
-    console.log('Bairro ' + this.bairro);
-    console.log('Especialidade ' + this.especialidadeId);
-
     if ( (this.especialidadeId == '' || this.especialidadeId == '0') 
         && this.bairro == ''){
           return;
@@ -87,17 +91,12 @@ export class RedeListaComponent implements OnInit {
       this.bairro, this.planoID, this.cidade, this.initPage).
     subscribe(referenciado => {
       this.listaReferenciado.push(...referenciado);
-      console.log(this.listaReferenciado);
-      console.log('Referenciado: ' + this.listaReferenciado[0]);
+  
       this.initPage += SIZE_PAGE_REFERENCIADO;
     },
     error => {
       this.mensagemErro = 'O serviço de Referenciado está fora do ar.';
     });
-
-    if (this.especialidadeId == '' || this.especialidadeId == '0'){
-      this.bairro = '';
-    }
 
   }
 
@@ -108,6 +107,7 @@ export class RedeListaComponent implements OnInit {
       this.listaLocalizacao = referenciadoLocalizacao;
       console.log(this.listaLocalizacao);
       console.log('bairro: ' + this.listaLocalizacao[0].bairro);
+      this.bairro = '';
     },
     error => {
       this.mensagemErro = 'O serviço de Localização está fora do ar.';
@@ -118,7 +118,6 @@ export class RedeListaComponent implements OnInit {
   setStorage() {
     this.cidade = this.storage.get('cidade');
     this.planoID = this.storage.get('planoId');
-    console.log('planoId: ', this.storage.get('planoId'), ', cidade: ', this.storage.get('cidade'));
   }
   
 }
