@@ -21,7 +21,7 @@
                                      <div class="col-md-4">
                                          <div class="form-group form-black">
                                              <label class="control-label">CPF</label>
-                                             <input type="text" disabled autocomplete="off" required mask="000.000.000-00" [(ngModel)]="cpf" name="cpf" class="form-control">
+                                             <input type="text" disabled autocomplete="off" required mask="000.000.000-00" [(ngModel)]="cpf" minlength="11" name="cpf" class="form-control">
                                          </div>
                                      </div>
      
@@ -34,7 +34,7 @@
                                      <div class="col-md-5">
                                          <div class="form-group form-black ">
                                              <label class="control-label">Email</label>
-                                             <input type="email" autocomplete="off" required [(ngModel)]="email" name="email" class="form-control" >
+                                             <input type="email" autocomplete="off" required [(ngModel)]="email" pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b" name="email" class="form-control" >
                                          </div>
                                      </div>
                                  </div>
@@ -101,7 +101,7 @@
                                        <div class="col-md-8">
                                            <div class="form-group form-black ">
                                                <label class="control-label">Complemento</label>
-                                               <input type="text" required maxlength="50" autocomplete="off" name="complemento" [(ngModel)]="complemento" class="form-control">
+                                               <input type="text" maxlength="50" autocomplete="off" name="complemento" [(ngModel)]="complemento" class="form-control">
                                            </div>
                                        </div>
      
@@ -110,7 +110,7 @@
                                        <div class="col-md-4">
                                          <div class="form-group form-black ">
                                              <label class="control-label">Telefone</label>
-                                             <input type="text"  mask="(00)00000-0000" autocomplete="off" required [(ngModel)]="telefone" name="telefone" class="form-control" >
+                                             <input type="text"  mask="(00)00000-0000" autocomplete="off" required [(ngModel)]="telefone" minlength="11" name="telefone" class="form-control" >
                                          </div>
                                      </div>
                                      
