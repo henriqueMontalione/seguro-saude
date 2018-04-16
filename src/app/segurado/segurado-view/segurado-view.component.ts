@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
+//import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SeguradoService } from '../segurado.service';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
@@ -18,7 +18,7 @@ export class SeguradoViewComponent implements OnInit {
   private plano;
 
   constructor(private seguradoService : SeguradoService , 
-    @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+    //@Inject(LOCAL_STORAGE) private storage: WebStorageService,
     private router: Router, private route: ActivatedRoute ,
     public  navBar :  NavbarComponent,
     private seguradoEventService : SeguradoEventService) { 
@@ -26,33 +26,34 @@ export class SeguradoViewComponent implements OnInit {
     }
   ngOnInit() {
 
-    console.log('[Seguro Saude] - Carregando segurado de CPF:' + this.storage.get('cpf') + '.')
+    //console.log('[Seguro Saude] - Carregando segurado de CPF:' + this.storage.get('cpf') + '.')
     
-    if (this.storage.get('cpf') != undefined &&
-    this.storage.get('cpf') != ''){
+    //if (this.storage.get('cpf') != undefined &&
+    //this.storage.get('cpf') != ''){
 
-      this.seguradoService.getSegurado( this.storage.get('cpf'))
+      this.seguradoService.getSegurado('11111111111' /*this.storage.get('cpf')*/)
       .subscribe(segurado => {
            this.nome = segurado.nome;
            this.cpf = segurado.cpf;
            this.numeroApolice = segurado.numeroApolice;
            this.plano = segurado.plano.nome;
            
-           this.storage.set('planoId', segurado.plano.id);
-           this.storage.set('cidade' , segurado.endereco.cidade); 
+           //this.storage.set('planoId', segurado.plano.id);
+           //this.storage.set('cidade' , segurado.endereco.cidade); 
         }
       );
 
-     } else {
-      this.seguradoEventService.seguradoLogado.emit(false);
-      this.router.navigate(['']);
-     }
+     //} else {
+      //this.seguradoEventService.seguradoLogado.emit(false);
+      //this.router.navigate(['']);
+     //}
   
+     
   }
 
   sair(){
-    this.seguradoEventService.seguradoLogado.emit(false);
-    this.storage.remove('cpf');
+    //this.seguradoEventService.seguradoLogado.emit(false);
+    //this.storage.remove('cpf');
     this.router.navigate(['']);
   }
 

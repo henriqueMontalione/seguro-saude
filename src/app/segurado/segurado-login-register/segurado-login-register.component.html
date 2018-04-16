@@ -156,10 +156,25 @@
                                     <div class="form-group form-black">
                                             <label >Senha</label>
                                             <input type="password" maxlength="20" class="form-control">
-                                        </div>
-                                        <div class="form-group form-black label-floating is-empty">
+                                    </div>
+                                    <div class="form-group form-black label-floating is-empty">
                                         <button type="submit" class="btn btn-danger pull-right" [disabled]="!loginForm.valid" >Entrar</button>
                                     </div>
+                                    
+                                    <div class="form-group">
+                                        <button type="buton" class="btn btn-block" (click)="signInWithFacebook()">
+                                            <i class="fa fa-facebook" aria-hidden="true"></i> 
+                                          Login with Facebook
+                                        </button>
+                                        <button type="button" class="btn btn-block" (click)="signInWithTwitter()">
+                                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                                            Login with Twitter
+                                        </button>
+                                        <button type="button" class="btn btn-block" (click)="signInWithGoogle()">
+                                            <i class="fa fa-google" aria-hidden="true"></i> Connect Google
+                                        </button>
+                                    </div>
+                                    
                                 </form>
                             </div>
                         </div>

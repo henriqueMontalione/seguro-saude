@@ -6,10 +6,13 @@
                   <div class="card-avatar">
                       <a>
                           <img class="img" src="../assets/img/faces/marc.jpg" />
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="" (click)="authService.logout()">Logout Teste</a></li>
+                            </ul>
                       </a>
                   </div>
   
-                  <div class="content">
+                  <div class="content"><!-- *ngIf="nome !== undefined"-->
                       <h6 class="category text-gray">Apólice: {{numeroApolice}}</h6>
                       <h6 class="category text-gray">CPF: {{cpf}}</h6>
                       <h4 class="card-title">Segurado: {{nome}}</h4>
@@ -21,4 +24,3 @@
       </div>
   </div>
 </div>
-  

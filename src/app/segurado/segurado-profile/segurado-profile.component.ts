@@ -42,17 +42,17 @@ export class SeguradoProfileComponent implements OnInit {
   private mensagemSucesso : string;
 
   constructor(private seguradoService : SeguradoService , 
-    @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+    //@Inject(LOCAL_STORAGE) private storage: WebStorageService,
     private router: Router, private route: ActivatedRoute,
     private seguradoEventService: SeguradoEventService) { }
 
   ngOnInit() {
 
-    console.log('[Seguro Saude] - Carregando segurado de CPF:' + this.storage.get('cpf') + '.')
+    /* console.log('[Seguro Saude] - Carregando segurado de CPF:' + this.storage.get('cpf') + '.')
     if (this.storage.get('cpf') != undefined &&
-    this.storage.get('cpf') != ''){
+    this.storage.get('cpf') != ''){ */
 
-      this.seguradoService.getSegurado( this.storage.get('cpf'))
+      this.seguradoService.getSegurado( '11111111111'/*this.storage.get('cpf')*/)
       .subscribe(segurado => {
            this.nome = segurado.nome;
            this.cpf = segurado.cpf;
@@ -71,11 +71,11 @@ export class SeguradoProfileComponent implements OnInit {
         }
       );
 
-     } else {
+     /* } else {
       this.seguradoEventService.seguradoLogado.emit(false);
       this.storage.remove('cpf'); 
       this.router.navigate(['']);
-     }
+     } */
     
   }
 
@@ -139,7 +139,7 @@ export class SeguradoProfileComponent implements OnInit {
 
   sair(){
     this.seguradoEventService.seguradoLogado.emit(false);
-    this.storage.remove('cpf');
+    //this.storage.remove('cpf');
     this.router.navigate(['']);
   }
 

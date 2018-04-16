@@ -3,12 +3,13 @@ import { NgForm } from '@angular/forms';
 import { SeguradoService } from '../segurado.service';
 import { Endereco } from '../../shared/endereco.model';
 import { SeguradoPlano } from '../../shared/segurado-plano.model';
-import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
+//import {LOCAL_STORAGE, WebStorageService} from 'angular-webstorage-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Segurado } from '../../shared/segurado.model';
 import { SeguradoEventService } from '../segurado-event.service';
 
-
+import { AuthService } from './../../services/auth.service';
+import * as firebase from 'firebase/app';//teste
 @Component({
   selector: 'app-segurado-login-register',
   templateUrl: './segurado-login-register.component.html'
@@ -42,18 +43,20 @@ export class SeguradoLoginRegisterComponent implements OnInit {
 
   private mensagemErro : string;
 
+  private user2: any = null; // teste
 
   constructor(private seguradoService : SeguradoService , 
-    @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+    //@Inject(LOCAL_STORAGE) private storage: WebStorageService,
     private router: Router, private route: ActivatedRoute,
-    private seguradoEventService: SeguradoEventService) { }
+    private seguradoEventService: SeguradoEventService,
+    private auth: AuthService) { }
 
   ngOnInit() {
 
     console.log('[Seguro Saude] - Executando o metodo de carga de plano.');
 
-    this.storage.remove('cpf');
-    this.seguradoEventService.seguradoLogado.emit(false);
+    //this.storage.remove('cpf');
+    //this.seguradoEventService.seguradoLogado.emit(false);
 
     this.seguradoService.getPlanos().
             subscribe(seguradoPlanos => {
@@ -62,7 +65,8 @@ export class SeguradoLoginRegisterComponent implements OnInit {
             error => {
               this.mensagemErro = 'Não foram localizados Planos ou o serviço esta fora do ar.';
             }
-          )       
+          )  
+    
   }
 
   buscarCepParaCadastro(){
@@ -120,8 +124,8 @@ export class SeguradoLoginRegisterComponent implements OnInit {
     this.seguradoService.saveSegurado(this.segurado)
     .subscribe(segurado => {
               console.log('[Segurado Saude] - Segurado cadastrado CPF : ' + segurado.cpf + ' .')
-              this.storage.set('cpf', segurado.cpf);
-              this.seguradoEventService.seguradoLogado.emit(true);
+              //this.storage.set('cpf', segurado.cpf);
+              //this.seguradoEventService.seguradoLogado.emit(true);
               this.router.navigate(['segurado-view']);
            } , 
            error => {
@@ -136,8 +140,9 @@ export class SeguradoLoginRegisterComponent implements OnInit {
 
       this.seguradoService.getSegurado(this.loginCPF)
       .subscribe(segurado => {
-          this.storage.set('cpf', segurado.cpf);
-          this.seguradoEventService.seguradoLogado.emit(true);
+          console.log('logarsegurado() teste');
+          //this.storage.set('cpf', segurado.cpf);
+          //this.seguradoEventService.seguradoLogado.emit(true);
           this.router.navigate(['segurado-view']);
         }, 
           error => {
@@ -147,5 +152,34 @@ export class SeguradoLoginRegisterComponent implements OnInit {
       );
   }
 
+  /*login(usuario: string, senha: string) {
+    this.auth.login(usuario, senha);
+  }*/
+
+  signInWithTwitter() {
+    this.auth.signInWithTwitter()
+    .then((res) => { 
+      console.log('roteando para segurado-view');
+     this.router.navigate(['segurado-view']);
+    })
+    .catch((err) => console.log(err));
+  }
+
+  signInWithGoogle() {
+    this.auth.signInWithGoogle()
+    .then((res) => { 
+      console.log('roteando para segurado-view');
+     this.router.navigate(['segurado-view']);
+   })
+   .catch((err) => console.log(err));
+  }
+
+  signInWithFacebook() {
+    this.auth.signInWithFacebook()
+    .then((res) => { 
+        this.router.navigate(['segurado-view']);
+      })
+    .catch((err) => console.log(err));
+  }
 
 }

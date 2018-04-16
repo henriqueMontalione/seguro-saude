@@ -23,10 +23,17 @@ import { ReferenciadoService } from './referenciado/referenciado.service';
 import { StorageServiceModule} from 'angular-webstorage-service';
 
 import {NgxMaskModule} from 'ngx-mask';
-import { SeguradoViewComponent } from './segurado/segurado-view/segurado-view.component'
+import { SeguradoViewComponent } from './segurado/segurado-view/segurado-view.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { SeguradoEventService } from './segurado/segurado-event.service';
 
+import { environment } from '../environments/environment';
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
+import { AuthService } from './services/auth.service';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -45,9 +52,13 @@ import { SeguradoEventService } from './segurado/segurado-event.service';
     RouterModule.forRoot(ROUTES),
     FormsModule,
     NgxMaskModule.forRoot(),
-    StorageServiceModule
+    StorageServiceModule,
+    AngularFireModule.initializeApp(environment.firebase, 'angular-auth-firebase'),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule
+
   ],
-  providers: [SeguradoService, ReferenciadoService , SeguradoEventService],
+  providers: [SeguradoService, ReferenciadoService , SeguradoEventService, AuthService, AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

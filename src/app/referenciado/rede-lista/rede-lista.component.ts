@@ -50,7 +50,7 @@ export class RedeListaComponent implements OnInit {
   
     ngOnInit() {
 
-     this.verifyLoogged();
+     //this.verifyLoogged();
      this.setStorage();
 
     this.referenciadoService.getEspecialidade().
