@@ -32,26 +32,26 @@ export class RedeListaComponent implements OnInit {
   private initPage : number = 0;
 
   constructor(private referenciadoService: ReferenciadoService, 
-    @Inject(LOCAL_STORAGE) private storage: WebStorageService,
+   // @Inject(LOCAL_STORAGE) private storage: WebStorageService,
     private router: Router, private route: ActivatedRoute,
     private seguradoEventService : SeguradoEventService) {}
 
    verifyLoogged(){
 
-      if (!(this.storage.get('cpf') != undefined &&
-      this.storage.get('cpf') != '')){
-        this.seguradoEventService.seguradoLogado.emit(false);
-        this.router.navigate(['']);
-      } else {
+     // if (!(this.storage.get('cpf') != undefined &&
+     // this.storage.get('cpf') != '')){
+      //  this.seguradoEventService.seguradoLogado.emit(false);
+     //   this.router.navigate(['']);
+      //} else {
         this.seguradoEventService.seguradoLogado.emit(true);
-      }
+     // }
 
    }
   
     ngOnInit() {
 
-     //this.verifyLoogged();
-     this.setStorage();
+     this.verifyLoogged();
+     ///this.setStorage();
 
     this.referenciadoService.getEspecialidade().
       subscribe(referenciadoEspecialidade => {
@@ -115,9 +115,9 @@ export class RedeListaComponent implements OnInit {
 
   }
 
-  setStorage() {
+  /* setStorage() {
     this.cidade = this.storage.get('cidade');
     this.planoID = this.storage.get('planoId');
-  }
+  } */
   
 }

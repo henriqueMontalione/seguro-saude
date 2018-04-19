@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-//import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SeguradoService } from '../segurado.service';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
@@ -12,16 +11,15 @@ import { SeguradoEventService } from '../segurado-event.service';
 })
 export class SeguradoViewComponent implements OnInit {
 
-  private nome : string;
-  private cpf : string;
-  private numeroApolice : string;
+  private nome: string;
+  private cpf: string;
+  private numeroApolice: string;
   private plano;
 
   constructor(private seguradoService : SeguradoService , 
-    //@Inject(LOCAL_STORAGE) private storage: WebStorageService,
     private router: Router, private route: ActivatedRoute ,
-    public  navBar :  NavbarComponent,
-    private seguradoEventService : SeguradoEventService) { 
+    public  navBar:  NavbarComponent,
+    private seguradoEventService: SeguradoEventService) { 
 
     }
   ngOnInit() {
@@ -47,13 +45,12 @@ export class SeguradoViewComponent implements OnInit {
       //this.seguradoEventService.seguradoLogado.emit(false);
       //this.router.navigate(['']);
      //}
-  
+
      
   }
 
-  sair(){
-    //this.seguradoEventService.seguradoLogado.emit(false);
-    //this.storage.remove('cpf');
+  sair() {
+    this.seguradoEventService.seguradoLogado.emit(false);    
     this.router.navigate(['']);
   }
 

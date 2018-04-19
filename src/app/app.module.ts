@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
 import { SeguradoComponent } from './segurado/segurado.component';
 import { SeguradoProfileComponent } from './segurado/segurado-profile/segurado-profile.component';
@@ -17,7 +16,7 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import { ReferenciadoComponent } from './referenciado/referenciado.component';
 import { RedeListaComponent } from './referenciado/rede-lista/rede-lista.component';
-import { SeguradoLoginRegisterComponent } from './segurado/segurado-login-register/segurado-login-register.component'
+import { SeguradoLoginRegisterComponent } from './segurado/segurado-login-register/segurado-login-register.component';
 import { ReferenciadoService } from './referenciado/referenciado.service';
 
 import { StorageServiceModule} from 'angular-webstorage-service';
@@ -34,6 +33,9 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
+import * as firebase from 'firebase';
+
+firebase.initializeApp(environment.firebase);
 
 @NgModule({
   declarations: [

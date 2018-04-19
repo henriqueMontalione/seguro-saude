@@ -27,6 +27,11 @@ export class AuthService {
       });
   }
 
+  signInRegular(email, password) {
+    const credential = firebase.auth.EmailAuthProvider.credential(email, password);
+    return this._firebaseAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+
   signInWithTwitter() {
     const provider = new firebase.auth.TwitterAuthProvider();
     return this.oAuthLogin(provider);
@@ -34,6 +39,7 @@ export class AuthService {
 
   signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
+    
     return this.oAuthLogin(provider);
   }
 
@@ -44,16 +50,20 @@ export class AuthService {
 
   private oAuthLogin(provider) { return this._firebaseAuth.auth.signInWithPopup(provider); }
 
-  signOut() {
-    this._firebaseAuth.auth.signOut().then(() => {
-        this.router.navigate(['/']);
-    });
-  }
-
   isLoggedIn() {
     if (this.userDetails == null ) {
         return false;
-      } else {
+      } else { 
+        this.userDetails.getIdToken(true).then(function(idToken) {
+          console.log('is loggedin true.');
+          console.log('token: ',  idToken); // *******basta enviar para o rest end-point
+          // Send token to your backend via HTTPS
+          // ...
+        }).catch(function(error) {
+          // Handle error
+        });
+        
+        
         return true;
       }
     }

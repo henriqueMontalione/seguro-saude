@@ -16,6 +16,11 @@ import * as firebase from 'firebase/app';//teste
 })
 export class SeguradoLoginRegisterComponent implements OnInit {
 
+  user = {
+    loginEmail: '',
+    password: ''
+  };
+
   /* Atributos dos formularios */
   private cpf:string;
   private nome:string;
@@ -38,8 +43,6 @@ export class SeguradoLoginRegisterComponent implements OnInit {
   private endereco : Endereco;
   private seguradoPlano : SeguradoPlano;
   private seguradoPlanos: Array<SeguradoPlano>;
-
-  private loginCPF : string;
 
   private mensagemErro : string;
 
@@ -134,11 +137,9 @@ export class SeguradoLoginRegisterComponent implements OnInit {
       );
   }
 
-  logarSegurado(){
+  logarSegurado() {
 
-      console.log('[Segurado Saude] - Localizando Segurado com CPF : ' + this.loginCPF + ' .')
-
-      this.seguradoService.getSegurado(this.loginCPF)
+      this.seguradoService.getSegurado(this.user.loginEmail)
       .subscribe(segurado => {
           console.log('logarsegurado() teste');
           //this.storage.set('cpf', segurado.cpf);
@@ -152,9 +153,15 @@ export class SeguradoLoginRegisterComponent implements OnInit {
       );
   }
 
-  /*login(usuario: string, senha: string) {
-    this.auth.login(usuario, senha);
-  }*/
+  signInWithEmail() {
+    this.auth.signInRegular(this.user.loginEmail, this.user.password)
+       .then((res) => {
+          console.log(res);
+    
+          this.router.navigate(['segurado-view']);
+       })
+       .catch((err) => console.log('error: ' + err));
+ }
 
   signInWithTwitter() {
     this.auth.signInWithTwitter()
