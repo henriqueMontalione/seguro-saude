@@ -34,6 +34,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import * as firebase from 'firebase';
+import { LoginComponent } from './login/login.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -46,6 +47,7 @@ firebase.initializeApp(environment.firebase);
     RedeListaComponent,
     SeguradoLoginRegisterComponent,
     SeguradoViewComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
