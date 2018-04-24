@@ -16,7 +16,7 @@ import { LoginComponent } from './login/login.component';
 /* Rotas de navegacao */
 export const ROUTES: Routes  = [
                       { path : '', component: LoginComponent },
-                      { path: 'register', component: SeguradoLoginRegisterComponent},
+                      { path: 'segurado-login-register', component: SeguradoLoginRegisterComponent},
                       { path : 'segurado-profile', canActivate: [AuthGuardService], component : SeguradoProfileComponent},
                       { path: 'segurado-view', canActivate: [AuthGuardService], component : SeguradoViewComponent},
                       { path : 'rede-lista', canActivate: [AuthGuardService], component : RedeListaComponent}
