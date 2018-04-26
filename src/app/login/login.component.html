@@ -29,35 +29,7 @@
       </div>
 
       <div class="col-md-6">
-        <div class="card">
-          <div class="card-header" data-background-color="red">
-            <h4 class="title">Entrar</h4>
-            <p class="category">Identifique-se</p>
-          </div>
-            <div class="content col-md-12">                              
-              <form  novalidate #loginForm="ngForm" (ngSubmit)="logarSegurado()">                      
-                <div class="form-group">
-                  <label>E-mail</label>
-                  <input type="email" required name="loginEmail" [(ngModel)]="user.loginEmail" required pattern="\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}\b" class="form-control">
-              
-                  <label >Senha</label>
-                  <input type="password" maxlength="20" name="password" [(ngModel)]="user.password" required class="form-control">
-
-                  <button type="submit" class="btn btn-danger" [disabled]="loginForm.invalid" (click)="signInWithEmail()">Login</button>
-                
-                  <button type="button" class="btn btn-block btn-social" (click)="signInWithFacebook()" name="facebookteste" id="teste" [ngClass]="signColorFacebook" (mouseover)="signColorFacebook='btn-facebook'" (mouseout)="signColorFacebook='btn-block'">
-                    <i class="fa fa-facebook" aria-hidden="true"></i> Login with Facebook
-                  </button>
-                  <button type="button" class="btn btn-block btn-social" (click)="signInWithTwitter()" [ngClass]="signColorTwitter" (mouseover)="signColorTwitter='btn-twitter'" (mouseout)="signColorTwitter='btn-block'">
-                    <i class="fa fa-twitter" aria-hidden="true"></i> Login with Twitter
-                  </button>
-                  <button type="button" class="btn btn-block btn-social" (click)="signInWithGoogle()" [ngClass]="signColorGoogle" (mouseover)="signColorGoogle='btn-google'" (mouseout)="signColorGoogle='btn-block'">
-                    <i class="fa fa-google" aria-hidden="true"></i> Login with Google
-                  </button>
-                </div>      
-              </form>              
-            </div>
-        </div>
+          <app-logar></app-logar>
       </div>
 
     </div>

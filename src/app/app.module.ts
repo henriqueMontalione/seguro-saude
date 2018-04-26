@@ -35,6 +35,7 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import * as firebase from 'firebase';
 import { LoginComponent } from './login/login.component';
+import { LogarComponent } from './logar/logar.component';
 
 firebase.initializeApp(environment.firebase);
 
@@ -48,6 +49,7 @@ firebase.initializeApp(environment.firebase);
     SeguradoLoginRegisterComponent,
     SeguradoViewComponent,
     LoginComponent,
+    LogarComponent,
   ],
   imports: [
     BrowserModule,

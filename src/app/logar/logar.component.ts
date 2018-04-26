@@ -6,10 +6,10 @@ import { SeguradoService } from './../segurado/segurado.service';
 import { AuthService } from './../services/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
+  selector: 'app-logar',
+  templateUrl: './logar.component.html',
 })
-export class LoginComponent implements OnInit {
+export class LogarComponent implements OnInit {
 
   user = {
     loginEmail: '',
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   };
 
   private mensagemErro: string;
-  
+
   constructor(private router: Router, private auth: AuthService,
               private seguradoService: SeguradoService, 
               private seguradoEventService: SeguradoEventService) { }
@@ -75,6 +75,5 @@ export class LoginComponent implements OnInit {
       })
     .catch((err) => console.log(err));
   }
-
 
 }
