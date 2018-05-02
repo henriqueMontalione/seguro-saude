@@ -27,7 +27,7 @@ export class LogarComponent implements OnInit {
 
   logarSegurado() {
 
-    this.seguradoService.getSegurado(this.user.loginEmail)
+    this.seguradoService.getSegurado('11111111111')//(this.user.loginEmail)
     .subscribe(segurado => {
         console.log('logarsegurado()');      
         this.seguradoEventService.seguradoLogado.emit(true);

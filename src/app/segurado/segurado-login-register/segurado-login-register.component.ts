@@ -46,7 +46,6 @@ export class SeguradoLoginRegisterComponent implements OnInit {
 
   private mensagemErro : string;
 
-  private user2: any = null; // teste
 
   constructor(private seguradoService : SeguradoService , 
     //@Inject(LOCAL_STORAGE) private storage: WebStorageService,

@@ -1,5 +1,5 @@
 
-const  SERVER_URL= 'http://192.168.0.161';
+const  SERVER_URL=  'http://192.168.0.47'; // 'http://api.azul.vertigo.com.br/';
 
 export const ENDERECO_GET_SERVICE =  `${SERVER_URL}/localizacao/correios/endereco?cep=`;
 export const PLANO_GET_SERVICE =  `${SERVER_URL}/plano`;
