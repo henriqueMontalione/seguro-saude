@@ -1,5 +1,5 @@
 import { Referenciado } from './../shared/referenciado.model';
-import { LOCALIZACAO_SERVICE_SWAGGER, LOCALIZACAO_GET_SERVICE, REFERENCIADO_GET_SERVICE, ESPECIALIDADE_GET_SERVICE } from './../../app.api';
+import { LOCALIZACAO_GET_SERVICE, REFERENCIADO_GET_SERVICE, ESPECIALIDADE_GET_SERVICE } from './../../app.api';
 import { ReferenciadoLocalizacao } from './../shared/referenciadoLocalizacao.model';
 import { Injectable } from '@angular/core';
 import { ReferenciadoEspecialidade } from '../shared/referenciadoEspecialidade.model';
@@ -10,12 +10,12 @@ import 'rxjs/add/operator/catch';
 import { _headers_get } from '../app.api-util';
 
 
-export const SIZE_PAGE_REFERENCIADO : number = 5;
+export const SIZE_PAGE_REFERENCIADO: number = 5;
 
 @Injectable()
 export class ReferenciadoService {
 
-    private initPage : number = 0;
+    private initPage: number = 0;
 
     constructor(private httpClient: HttpClient) {}
 
